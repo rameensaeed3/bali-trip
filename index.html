@@ -118,7 +118,65 @@
   .food-item .desc { font-size: 12px; color: #666; margin-top: 3px; }
 
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 12px 0; }
-  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } .toc-grid { grid-template-columns: 1fr; } .date-strip { grid-template-columns: repeat(6, 1fr); } .day-header { grid-template-columns: 1fr; } }
+
+  @media (max-width: 700px) {
+    /* Cover */
+    .cover { padding: 20px 16px; }
+    .cover h1 { font-size: 20px; letter-spacing: 1px; margin-bottom: 6px; }
+    .cover h2 { font-size: 12px; margin-bottom: 6px; }
+    .cover .subtitle { font-size: 11px; }
+
+    /* TOC */
+    .toc { padding: 8px 12px; overflow-x: auto; }
+    .toc-grid { flex-wrap: nowrap; gap: 0; }
+    .toc-item { font-size: 10px; padding: 4px 12px 4px 0; margin-right: 12px; white-space: nowrap; }
+
+    /* Date strip */
+    .date-strip { grid-template-columns: repeat(6, 1fr); }
+    .date-cell { padding: 6px 2px; }
+    .date-cell .wd { font-size: 7px; }
+    .date-cell .d { font-size: 11px; }
+    .date-cell .loc { font-size: 7px; display: none; }
+
+    /* Content */
+    .content { padding: 12px 14px 32px; }
+
+    /* Day blocks */
+    .day-header { grid-template-columns: 1fr; gap: 0; }
+    .day-date-col { padding: 10px 14px 4px; }
+    .day-title-col { padding: 0 14px 4px; }
+    .day-location-col { padding: 0 14px 10px; }
+    .day-title-col .title { font-size: 13px; }
+    .activity { flex-direction: column; gap: 2px; }
+    .activity-time { min-width: unset; font-size: 10px; padding-top: 0; }
+    .activity-detail { font-size: 13px; }
+    .activity-note { font-size: 12px; }
+
+    /* Tables */
+    .transport-table { font-size: 11px; }
+    .transport-table th { font-size: 9px; padding: 6px 8px; }
+    .transport-table td { padding: 7px 8px; font-size: 11px; }
+    .transport-table th:nth-child(2),
+    .transport-table td:nth-child(2) { display: none; }
+
+    /* Two col */
+    .two-col { grid-template-columns: 1fr; }
+
+    /* Food */
+    .food-zone { gap: 8px; }
+    .food-item { padding: 10px 12px; }
+    .food-item .name { font-size: 12px; }
+    .food-item .desc { font-size: 11px; }
+
+    /* Section titles */
+    h2.section-title { font-size: 9px; letter-spacing: 2px; margin: 12px 0 14px; }
+    h3.sub-title { font-size: 11px; }
+
+    /* Logistics boxes */
+    .logistics-box { padding: 14px; }
+    .logistics-box h4 { font-size: 12px; }
+    .logistics-box p { font-size: 12px; }
+  }
 
   footer { text-align: center; padding: 28px; color: rgba(255,255,255,0.45); background: #1a4a3a; font-size: 11px; letter-spacing: 1px; }
 </style>
