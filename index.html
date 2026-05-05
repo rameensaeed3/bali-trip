@@ -10,12 +10,14 @@
 
   /* COVER */
   .cover { background: linear-gradient(135deg, #1a4a3a 0%, #2d7a5a 50%, #4a9a7a 100%); color: white; padding: 32px 60px; text-align: center; }
-  .cover h1 { font-size: 36px; font-weight: 300; letter-spacing: 3px; margin-bottom: 8px; }
+  .cover h1 { font-size: 36px; font-weight: 300; letter-spacing: 3px; margin-bottom: 8px; white-space: nowrap; }
   .cover h2 { font-size: 15px; font-weight: 300; opacity: 0.85; margin-bottom: 10px; letter-spacing: 2px; }
   .cover .subtitle { font-size: 13px; opacity: 1; letter-spacing: 0.5px; color: rgba(255,255,255,0.92); font-family: Arial, sans-serif; }
 
   /* DATE STRIP */
-  .date-strip { display: grid; grid-template-columns: repeat(12, 1fr); background: #f0ede6; border-bottom: 2px solid #ccc; position: sticky; top: 0; z-index: 90; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
+  .date-strip { display: flex; overflow-x: auto; background: #f0ede6; border-bottom: 2px solid #ccc; z-index: 90; box-shadow: 0 2px 8px rgba(0,0,0,0.10); -webkit-overflow-scrolling: touch; }
+  .date-strip.is-sticky { position: fixed; left: 0; right: 0; }
+  .date-cell { flex: 0 0 calc(100% / 12); min-width: 60px; padding: 9px 4px; border-right: 1px solid #d4cfc5; text-align: center; }
   .date-cell { padding: 9px 4px; border-right: 1px solid #d4cfc5; text-align: center; }
   .date-cell:last-child { border-right: none; }
   .date-cell .wd { font-size: 9px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
@@ -120,23 +122,23 @@
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 12px 0; }
 
   @media (max-width: 700px) {
-    /* Cover */
-    .cover { padding: 20px 16px; }
-    .cover h1 { font-size: 20px; letter-spacing: 1px; margin-bottom: 6px; }
-    .cover h2 { font-size: 12px; margin-bottom: 6px; }
-    .cover .subtitle { font-size: 11px; }
+    /* Cover — prevent wrapping */
+    .cover { padding: 18px 12px; }
+    .cover h1 { font-size: 18px; letter-spacing: 1px; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cover h2 { font-size: 11px; margin-bottom: 5px; letter-spacing: 1px; }
+    .cover .subtitle { font-size: 10px; line-height: 1.5; }
 
-    /* TOC */
-    .toc { padding: 8px 12px; overflow-x: auto; }
-    .toc-grid { flex-wrap: nowrap; gap: 0; }
+    /* TOC — single scrollable row, no wrapping */
+    .toc { padding: 8px 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+    .toc-grid { display: inline-flex; flex-wrap: nowrap; gap: 0; }
     .toc-item { font-size: 10px; padding: 4px 12px 4px 0; margin-right: 12px; white-space: nowrap; }
 
-    /* Date strip */
-    .date-strip { grid-template-columns: repeat(6, 1fr); }
-    .date-cell { padding: 6px 2px; }
+    /* Date strip — single scrollable row */
+    .date-strip { display: flex; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .date-cell { flex: 0 0 72px; min-width: 72px; padding: 7px 4px; }
     .date-cell .wd { font-size: 7px; }
-    .date-cell .d { font-size: 11px; }
-    .date-cell .loc { font-size: 7px; display: none; }
+    .date-cell .d { font-size: 12px; }
+    .date-cell .loc { font-size: 7px; }
 
     /* Content */
     .content { padding: 12px 14px 32px; }
@@ -163,14 +165,13 @@
     .two-col { grid-template-columns: 1fr; }
 
     /* Food */
-    .food-zone { gap: 8px; }
-    .food-item { padding: 10px 12px; }
+    .food-zone { gap: 8px; padding: 14px 14px; }
     .food-item .name { font-size: 12px; }
     .food-item .desc { font-size: 11px; }
 
     /* Section titles */
     h2.section-title { font-size: 9px; letter-spacing: 2px; margin: 12px 0 14px; }
-    h3.sub-title { font-size: 11px; }
+    h3.sub-title { font-size: 13px; }
 
     /* Logistics boxes */
     .logistics-box { padding: 14px; }
@@ -215,6 +216,9 @@
   <div class="date-cell" onclick="scrollToDay('day-10')"><div class="wd">Sat</div><div class="d">May 16</div><div class="loc">→ Bali (return)</div></div>
   <div class="date-cell depart" onclick="scrollToDay('day-departure')"><div class="wd">Sun</div><div class="d">May 17</div><div class="loc">Fly Home</div></div>
 </div>
+
+<!-- DATE STRIP PLACEHOLDER (maintains layout when strip goes fixed) -->
+<div id="date-strip-placeholder" style="display:none;"></div>
 
 <div class="content">
 
@@ -531,31 +535,66 @@
 <footer>Bali · Gili Islands · Lombok · May 6–17, 2026 · Halal-Friendly Travel Guide · Version 5</footer>
 
 <script>
-function getStickyOffset() {
+function getTocHeight() {
   const toc = document.querySelector('.toc');
-  const strip = document.querySelector('.date-strip');
-  let offset = 0;
-  if (toc) offset += toc.offsetHeight;
-  if (strip && strip.offsetParent !== null) offset += strip.offsetHeight;
-  return offset + 12;
+  return toc ? toc.offsetHeight : 0;
 }
 
-function positionDateStrip() {
-  const toc = document.querySelector('.toc');
+function getStripHeight() {
   const strip = document.querySelector('.date-strip');
-  if (toc && strip) {
-    strip.style.top = toc.offsetHeight + 'px';
+  return strip ? strip.offsetHeight : 0;
+}
+
+// Position date strip below TOC when sticky
+function positionDateStrip() {
+  const strip = document.querySelector('.date-strip');
+  if (strip && strip.classList.contains('is-sticky')) {
+    strip.style.top = getTocHeight() + 'px';
+  }
+}
+
+// Scroll-aware: show date strip only when inside itinerary section
+function handleScroll() {
+  const strip = document.querySelector('.date-strip');
+  const placeholder = document.getElementById('date-strip-placeholder');
+  const itinerarySection = document.getElementById('section-1');
+  const nextSection = document.getElementById('section-2');
+  if (!strip || !itinerarySection) return;
+
+  const tocH = getTocHeight();
+  const stripH = strip.offsetHeight;
+  const scrollY = window.scrollY;
+  const sectionTop = itinerarySection.getBoundingClientRect().top + scrollY;
+  const sectionBottom = nextSection ? (nextSection.getBoundingClientRect().top + scrollY) : document.body.scrollHeight;
+  const stripNaturalTop = strip.getBoundingClientRect().top + scrollY;
+
+  const inItinerary = scrollY + tocH >= sectionTop && scrollY + tocH < sectionBottom;
+
+  if (inItinerary) {
+    if (!strip.classList.contains('is-sticky')) {
+      strip.classList.add('is-sticky');
+      strip.style.top = tocH + 'px';
+      strip.style.width = '100%';
+      if (placeholder) {
+        placeholder.style.display = 'block';
+        placeholder.style.height = stripH + 'px';
+      }
+    }
+  } else {
+    if (strip.classList.contains('is-sticky')) {
+      strip.classList.remove('is-sticky');
+      strip.style.top = '';
+      strip.style.width = '';
+      strip.style.position = '';
+      if (placeholder) placeholder.style.display = 'none';
+    }
   }
 }
 
 function scrollToDay(id) {
   const el = document.getElementById(id);
   if (!el) return;
-  const toc = document.querySelector('.toc');
-  const strip = document.querySelector('.date-strip');
-  let offset = toc ? toc.offsetHeight : 0;
-  offset += strip ? strip.offsetHeight : 0;
-  offset += 12;
+  const offset = getTocHeight() + getStripHeight() + 12;
   const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
   window.scrollTo({ top: top, behavior: 'smooth' });
 }
@@ -563,14 +602,14 @@ function scrollToDay(id) {
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
-  const toc = document.querySelector('.toc');
-  const offset = (toc ? toc.offsetHeight : 0) + 12;
+  const offset = getTocHeight() + 12;
   const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
   window.scrollTo({ top: top, behavior: 'smooth' });
 }
 
-window.addEventListener('load', positionDateStrip);
+window.addEventListener('scroll', handleScroll);
 window.addEventListener('resize', positionDateStrip);
+window.addEventListener('load', handleScroll);
 </script>
 </body>
 </html>
