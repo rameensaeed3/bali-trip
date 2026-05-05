@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bali & Indonesia Travel Guide — May 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; color: #2c2c2c; background: #fdfcf8; font-size: 15px; line-height: 1.7; }
+
+  /* COVER */
+  .cover { background: linear-gradient(135deg, #1a4a3a 0%, #2d7a5a 50%, #4a9a7a 100%); color: white; padding: 32px 60px; text-align: center; }
+  .cover h1 { font-size: 36px; font-weight: 300; letter-spacing: 3px; margin-bottom: 8px; }
+  .cover h2 { font-size: 15px; font-weight: 300; opacity: 0.85; margin-bottom: 10px; letter-spacing: 2px; }
+  .cover .subtitle { font-size: 13px; opacity: 1; letter-spacing: 0.5px; color: rgba(255,255,255,0.92); font-family: Arial, sans-serif; }
+
+  /* DATE STRIP */
+  .date-strip { display: grid; grid-template-columns: repeat(12, 1fr); background: #f0ede6; border-bottom: 2px solid #ccc; position: sticky; top: 0; z-index: 90; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
+  .date-cell { padding: 9px 4px; border-right: 1px solid #d4cfc5; text-align: center; }
+  .date-cell:last-child { border-right: none; }
+  .date-cell .wd { font-size: 9px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+  .date-cell .d { font-weight: 700; color: #1a4a3a; font-size: 13px; line-height: 1.3; }
+  .date-cell .loc { color: #2d7a5a; font-size: 9px; margin-top: 2px; line-height: 1.3; }
+  html { scroll-behavior: smooth; }
+  .date-cell.arrive { background: #e8f4ef; }
+  .date-cell.depart { background: #fde8e8; }
+  .date-cell { cursor: pointer; transition: background 0.15s; }
+  .date-cell:hover { background: #d4ede2; }
+  .date-cell.arrive:hover { background: #c0e4d4; }
+  .date-cell.depart:hover { background: #f5d0d0; }
+
+  /* TOC */
+  .toc { background: #f7f4ee; padding: 12px 60px; border-bottom: 2px solid #d4cfc5; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  .toc h3 { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #999; margin-bottom: 6px; }
+  .toc-grid { display: flex; flex-direction: row; gap: 0; }
+  .toc-item { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: #2d7a5a; padding: 6px 20px 6px 0; border-right: 1px solid #ccc; margin-right: 20px; cursor: pointer; transition: color 0.15s; white-space: nowrap; text-transform: uppercase; }
+  .toc-item:last-child { border-right: none; margin-right: 0; }
+  .toc-item:hover { color: #1a4a3a; }
+
+  /* CONTENT */
+  .content { max-width: 960px; margin: 0 auto; padding: 20px 40px 48px; }
+  h2.section-title { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #2d7a5a; margin: 16px 0 18px; padding-bottom: 9px; border-bottom: 2px solid #2d7a5a; }
+  h3.sub-title { font-size: 17px; font-weight: 700; color: #1a4a3a; margin: 26px 0 10px; }
+  h4 { font-size: 13px; font-weight: 700; color: #555; margin: 16px 0 7px; text-transform: uppercase; letter-spacing: 1px; }
+  p { margin-bottom: 11px; color: #444; font-size: 14px; }
+
+  /* OVERVIEW TABLE */
+  .overview-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+  .overview-table th { background: #1a4a3a; color: white; padding: 8px 12px; text-align: left; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .overview-table td { padding: 9px 12px; border-bottom: 1px solid #e8e3d8; vertical-align: top; }
+  .overview-table tr:nth-child(even) td { background: #f9f7f3; }
+
+  /* DAY BLOCKS */
+  .day-block { background: white; border: 1px solid #e0dbd0; border-radius: 8px; margin: 16px 0; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.04); }
+  .day-header { background: #1a4a3a; color: white; padding: 0; display: grid; grid-template-columns: 140px 1fr auto; }
+  .day-date-col { padding: 12px 16px; border-right: 1px solid rgba(255,255,255,0.15); }
+  .day-date-col .date { font-size: 13px; font-weight: 700; line-height: 1.3; }
+  .day-date-col .day-label { font-size: 10px; opacity: 0.6; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+  .day-title-col { padding: 12px 16px; display: flex; align-items: center; }
+  .day-title-col .title { font-size: 14px; font-weight: 600; }
+  .day-location-col { padding: 12px 16px; display: flex; align-items: center; }
+  .day-location-col .loc-wrap { text-align: right; }
+  .day-location-col .loc { font-size: 10px; opacity: 0.6; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; display: block; }
+  .day-location-col .hotel-sub { font-size: 10px; opacity: 0.5; display: block; margin-top: 3px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .day-body { padding: 16px 20px; }
+
+  .activity { display: flex; gap: 14px; padding: 8px 0; border-bottom: 1px solid #f5f2ec; }
+  .activity:last-child { border-bottom: none; }
+  .activity-time { font-size: 11px; color: #2d7a5a; font-weight: 700; min-width: 68px; padding-top: 3px; flex-shrink: 0; }
+  .activity-detail { font-size: 14px; color: #333; }
+  .activity-detail strong { color: #1a4a3a; }
+  .activity-note { font-size: 12px; color: #777; margin-top: 3px; line-height: 1.55; }
+  .friend-tag { display: inline-block; background: #f0e8fd; color: #6030a0; border-radius: 10px; padding: 1px 7px; font-size: 10px; font-weight: 700; margin-left: 5px; vertical-align: middle; }
+
+  .tag { display: inline-block; background: #e8f4ef; color: #2d7a5a; border-radius: 11px; padding: 2px 9px; font-size: 10px; font-weight: 600; margin: 2px 2px; }
+  .tag.gold { background: #fef9e7; color: #8a6d00; }
+  .tag.warn { background: #fff3cd; color: #856404; }
+  .tag.purple { background: #f3e8fd; color: #6030a0; }
+
+  /* TRANSPORT TABLE */
+  .transport-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  .transport-table th { background: #1a4a3a; color: white; padding: 8px 12px; text-align: left; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .transport-table td { padding: 9px 12px; border-bottom: 1px solid #e8e3d8; vertical-align: top; font-size: 13px; }
+  .transport-table tr:nth-child(even) td { background: #f9f7f3; }
+  .yes { color: #2d7a5a; font-weight: 700; }
+  .no { color: #c03020; }
+  .maybe { color: #c07a20; font-weight: 600; }
+
+  /* FERRY TABLE */
+  .ferry-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  .ferry-table th { background: #2d7a5a; color: white; padding: 8px 12px; text-align: left; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .ferry-table td { padding: 8px 12px; border-bottom: 1px solid #e8e3d8; }
+  .ferry-table tr:nth-child(even) td { background: #f9f7f3; }
+
+  /* BOXES */
+  .logistics-box { background: #f7f4ee; border: 1px solid #e0dbd0; border-radius: 7px; padding: 18px 20px; margin: 12px 0; }
+  .logistics-box h4 { margin-top: 0; }
+  .tip-box { background: #fffbf0; border: 1px solid #f0d080; border-left: 4px solid #e8a020; border-radius: 6px; padding: 12px 16px; margin: 12px 0; }
+  .tip-box .label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #b07820; font-weight: 700; margin-bottom: 5px; }
+  .tip-box p { margin: 0; font-size: 13px; color: #555; }
+  .warn-box { background: #fff5f5; border: 1px solid #f0c0c0; border-left: 4px solid #d04040; border-radius: 6px; padding: 12px 16px; margin: 12px 0; }
+  .warn-box .label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #c03030; font-weight: 700; margin-bottom: 5px; }
+  .warn-box p { margin: 0; font-size: 13px; color: #555; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 7px 0 7px 26px; position: relative; border-bottom: 1px solid #f0ede6; font-size: 13px; color: #444; }
+  .checklist li:before { content: "☐"; position: absolute; left: 0; color: #2d7a5a; font-size: 15px; line-height: 1.4; }
+  .checklist li:last-child { border-bottom: none; }
+
+  /* FOOD */
+  .food-zone { background: white; border: 1px solid #e0dbd0; border-left: 4px solid #2d7a5a; border-radius: 6px; padding: 18px 22px; margin: 14px 0; }
+  .food-item { padding: 10px 0; border-bottom: 1px solid #f0ede6; }
+  .food-item:last-child { border-bottom: none; }
+  .food-item .name { font-weight: 700; color: #1a4a3a; font-size: 14px; }
+  .food-item .cert { display: inline-block; background: #e8f4ef; color: #2d7a5a; border-radius: 9px; padding: 1px 7px; font-size: 9px; font-weight: 700; margin-left: 5px; text-transform: uppercase; }
+  .food-item .cert.warn { background: #fff3cd; color: #856404; }
+  .food-item .desc { font-size: 12px; color: #666; margin-top: 3px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 12px 0; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } .toc-grid { grid-template-columns: 1fr; } .date-strip { grid-template-columns: repeat(6, 1fr); } .day-header { grid-template-columns: 1fr; } }
+
+  footer { text-align: center; padding: 28px; color: rgba(255,255,255,0.45); background: #1a4a3a; font-size: 11px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <h1>BALI · GILI ISLANDS · LOMBOK</h1>
+  <h2>Complete Travel Guide — May 2026</h2>
+  <p class="subtitle">Wed May 6 – Sun May 17 &nbsp;·&nbsp; 12 Days &nbsp;·&nbsp; 2 Travelers &nbsp;·&nbsp; SFO ↔ DPS &nbsp;·&nbsp; 🕌 Halal-Friendly</p>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-grid">
+    <div class="toc-item" onclick="scrollToSection('section-1')">Itinerary</div>
+    <div class="toc-item" onclick="scrollToSection('section-2')">Practical Tips</div>
+    <div class="toc-item" onclick="scrollToSection('section-3')">Halal Food Guide</div>
+    <div class="toc-item" onclick="scrollToSection('section-4')">Bookings & Costs</div>
+  </div>
+</div>
+
+<!-- DATE STRIP -->
+<div class="date-strip">
+  <div class="date-cell arrive" onclick="scrollToDay('day-arrival')"><div class="wd">Wed</div><div class="d">May 6</div><div class="loc">Arrive → Ubud</div></div>
+  <div class="date-cell" onclick="scrollToDay('day-1')"><div class="wd">Thu</div><div class="d">May 7</div><div class="loc">Ubud Day 1</div></div>
+  <div class="date-cell" onclick="scrollToDay('day-2')"><div class="wd">Fri</div><div class="d">May 8</div><div class="loc">Ubud Day 2</div></div>
+  <div class="date-cell" onclick="scrollToDay('day-3')"><div class="wd">Sat</div><div class="d">May 9</div><div class="loc">Ubud Day 3</div></div>
+  <div class="date-cell" onclick="scrollToDay('day-4')"><div class="wd">Sun</div><div class="d">May 10</div><div class="loc">Ubud Day 4</div></div>
+  <div class="date-cell" onclick="scrollToDay('day-5')"><div class="wd">Mon</div><div class="d">May 11</div><div class="loc">→ Seminyak</div></div>
+  <div class="date-cell" onclick="scrollToDay('day-6')"><div class="wd">Tue</div><div class="d">May 12</div><div class="loc">Seminyak</div></div>
+  <div class="date-cell" onclick="scrollToDay('day-7')"><div class="wd">Wed</div><div class="d">May 13</div><div class="loc">→ Gili Islands</div></div>
+  <div class="date-cell" onclick="scrollToDay('day-8')"><div class="wd">Thu</div><div class="d">May 14</div><div class="loc">→ Lombok</div></div>
+  <div class="date-cell" onclick="scrollToDay('day-9')"><div class="wd">Fri</div><div class="d">May 15</div><div class="loc">Lombok</div></div>
+  <div class="date-cell" onclick="scrollToDay('day-10')"><div class="wd">Sat</div><div class="d">May 16</div><div class="loc">→ Bali (return)</div></div>
+  <div class="date-cell depart" onclick="scrollToDay('day-departure')"><div class="wd">Sun</div><div class="d">May 17</div><div class="loc">Fly Home</div></div>
+</div>
+
+<div class="content">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: ITINERARY -->
+<!-- ============================================================ -->
+<h2 class="section-title" id="section-1">1 — Itinerary</h2>
+<p>Items tagged <span class="friend-tag">Manaal</span> are personal picks from a friend who visited. 🛵 marks scooter-appropriate moments.</p>
+
+<!-- ARRIVAL DAY -->
+<div class="day-block" id="day-arrival">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Wed · May 6</div><div class="day-label">Arrival Day</div></div>
+    <div class="day-title-col"><div class="title">Land & Decompress</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Ubud · Private Driver</div><div class="hotel-sub">Puri Andong Villa</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">3:00 PM</div><div class="activity-detail"><strong>DPS Airport → Ubud</strong><div class="activity-note">Confirmed pickup at Ngurah Rai International Airport, 3:00 PM. Driver will be waiting at arrivals. ~1.5 hrs to Puri Andong Villa.</div></div></div>
+    <div class="activity"><div class="activity-time">Evening</div><div class="activity-detail"><strong>Balinese massage + light dinner</strong><div class="activity-note">Walk-in massage shops throughout Ubud — IDR 100,000–150,000 for 60–90 min. Don't over-schedule tonight. Rest is the only goal.</div></div></div>
+  </div>
+</div>
+
+<!-- DAY 1 -->
+<div class="day-block" id="day-1">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Thu · May 7</div><div class="day-label">Day 1</div></div>
+    <div class="day-title-col"><div class="title">Tegallalang · Elephant Safari Park · Ubud Market & Palace · Campuhan Sunset · Arabian Knight</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Ubud · Scooter</div><div class="hotel-sub">Puri Andong Villa</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">9:00 AM</div><div class="activity-detail"><strong>Rent scooter from Puri Andong or nearby shop</strong><div class="activity-note">Ask hotel reception or walk to any rental shop on Jl. Raya Ubud — IDR 70,000–100,000/day (~$4–6). Bring California motorcycle license and cash. Avoid leaving passport as deposit — offer IDR 200,000–300,000 cash deposit instead. ⚠️ Photograph the scooter all around before riding off to document pre-existing damage. Download Google Maps offline for Ubud/Gianyar/Bangli region the night before.</div></div></div>
+    <div class="activity"><div class="activity-time">9:30 AM</div><div class="activity-detail"><strong>Tegallalang Rice Terraces</strong><div class="activity-note">~20 mins north on the scooter — scenic ride through Ubud outskirts and village roads. Entry IDR 15,000. Find a clifftop café for coffee over the terraces. Skip the tourist swings. ~45–60 mins. Easy parking at the terraces.</div></div></div>
+    <div class="activity"><div class="activity-time">10:45 AM</div><div class="activity-detail"><strong>Mason Elephant Safari Park, Taro</strong> <span class="friend-tag">Manaal</span><div class="activity-note">Confirmed booking ✅ · General Admission · 2 adults · $44.50. ~10 mins from Tegallalang. Easy scooter parking at the entrance. Hand-feed and interact with rescued Sumatran elephants. Allow ~2 hrs — feeding zone, treetop walk, museum, elephant show. Note: elephant riding discontinued as of Jan 2026.</div></div></div>
+    <div class="activity"><div class="activity-time">1:00 PM</div><div class="activity-detail"><strong>Lunch at Huma Cafe</strong> <span class="friend-tag">Manaal</span><div class="activity-note">Ride back south into Ubud — natural lunch stop on the way in from Taro. Beautiful garden setting, good coffee and food. Confirm pork-free when ordering. ~1 hr. Scooter parking easy outside.</div></div></div>
+    <div class="activity"><div class="activity-time">2:30 PM</div><div class="activity-detail"><strong>Back to Puri Andong Villa — freshen up</strong><div class="activity-note">Quick shower and change before heading back out. Keep the scooter for the afternoon and evening.</div></div></div>
+    <div class="activity"><div class="activity-time">3:15 PM</div><div class="activity-detail"><strong>Ubud Market & Ubud Palace</strong> <span class="friend-tag">Manaal</span><div class="activity-note">~5 min ride from Puri Andong. Scooter parking near the market on Jl. Raya Ubud. Ubud Market: batik, silver, spices, souvenirs — bargain hard, opening prices are 2–3×. Ubud Palace (Puri Saren) is right next door and free to enter. ~1 hr total.</div></div></div>
+    <div class="activity"><div class="activity-time">4:30 PM</div><div class="activity-detail"><strong>Campuhan Ridge Walk at Sunset</strong><div class="activity-note">~5 min ride west along Jl. Raya Campuhan. Small parking area right at the trailhead. Free, open 24 hrs. 2–3 km ridgeline walk through green Ubud hills. Arrive by 5:00 PM for golden hour. Bring water. Leave the scooter at the trailhead while you walk.</div></div></div>
+    <div class="activity"><div class="activity-time">7:00 PM</div><div class="activity-detail"><strong>Dinner at Arabian Knight Ubud</strong><div class="activity-note">🕌 Best halal-certified restaurant in Ubud — lamb mandi, kabsa, shawarma. On-site musholla. Open until 1 AM. Jl. Suweta No.1. ~5 min ride from Campuhan. Return scooter to hotel or rental shop after dinner.</div></div></div>
+  </div>
+</div>
+
+<!-- DAY 2 -->
+<div class="day-block" id="day-2">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Fri · May 8</div><div class="day-label">Day 2</div></div>
+    <div class="day-title-col"><div class="title">Monkey Forest · ATV Jungle Adventure · Tirta Empul · Bale Udang Dinner</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Ubud · Guided Tour</div><div class="hotel-sub">Puri Andong Villa</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">9:00 AM</div><div class="activity-detail"><strong>Gorilla Adventures Bali pickup from Puri Andong Villa</strong><div class="activity-note">Driver contacts you to arrange exact pickup 1–2 days before. Booking ref: GYGBLHQ9KH2L. Wear comfortable clothes and closed-toe shoes. Bring a change of clothes, waterproof camera, and cash. Payment auto-charged May 5.</div></div></div>
+    <div class="activity"><div class="activity-time">~9:30 AM</div><div class="activity-detail"><strong>Monkey Forest</strong><div class="activity-note">First stop on the tour. 700+ long-tailed macaques in a sacred forest complex — ⚠️ secure all glasses, food, and loose items before entering. Entry IDR 80,000. ~45 mins.</div></div></div>
+    <div class="activity"><div class="activity-time">~10:30 AM</div><div class="activity-detail"><strong>ATV Quad Bike Jungle Adventure</strong><div class="activity-note">~1–1.5 hrs riding through rice paddies, jungle trails, villages and terrain with PT. Gorilla Adventures Bali. Safety briefing and all equipment provided. Expect to get muddy — change of clothes essential. Shower facilities available on-site after the ride.</div></div></div>
+    <div class="activity"><div class="activity-time">~12:30 PM</div><div class="activity-detail"><strong>Lunch (included with tour)</strong><div class="activity-note">Lunch is included in the booking. Confirm any dietary requirements (halal) directly with the operator via WhatsApp: +62 881 0370 72494.</div></div></div>
+    <div class="activity"><div class="activity-time">~2:00 PM</div><div class="activity-detail"><strong>Tirta Empul Water Temple</strong><div class="activity-note">Sacred spring purification temple — one of Bali's most spiritually significant sites. Dress modestly, sarong required (available at gate). Entry IDR 50,000. ~45 mins.</div></div></div>
+    <div class="activity"><div class="activity-time">4:00 PM</div><div class="activity-detail"><strong>Return to Puri Andong Villa — freshen up</strong><div class="activity-note">~8 hr total tour duration per booking. Drop-off back at hotel. Shower, change, and rest before dinner.</div></div></div>
+    <div class="activity"><div class="activity-time">6:30 PM</div><div class="activity-detail"><strong>Dinner at Bale Udang Mang Engking</strong><div class="activity-note">🕌 MUI halal certified. Dine in floating bamboo gazebos over a fish pond — one of Ubud's most atmospheric dining experiences. Famous for honey-grilled prawns. Book ahead if possible, especially for a gazebo table.</div></div></div>
+    <div class="activity"><div class="activity-time">After dinner</div><div class="activity-detail"><strong>Book Mt. Batur guide for tomorrow</strong><div class="activity-note">⚠️ CRITICAL: Call or WhatsApp your guide tonight to confirm the 2:30 AM pickup. Set multiple alarms before sleeping.</div></div></div>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div class="day-block" id="day-3">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Sat · May 9</div><div class="day-label">Day 3</div></div>
+    <div class="day-title-col"><div class="title">⭐ Mt. Batur Sunrise · Kintamani Viewpoint · Hot Springs · Rest</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">North Bali / Ubud · Guided Tour</div><div class="hotel-sub">Puri Andong Villa</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">2:30 AM</div><div class="activity-detail"><strong>Mt Batur Jeep + Trekking pickup from Puri Andong Villa</strong><div class="activity-note">Confirmed booking ✅ · Private Sunrise Trekking + Hot Spring · $99.80 for 2 · Pickup from Puri Andong Villa. Driver will contact via WhatsApp the afternoon before to confirm exact time. Wear warm layers — cold at the summit. Bring headlamp.</div></div></div>
+    <div class="activity"><div class="activity-time">4:30 AM</div><div class="activity-detail"><strong>Summit climb — 2 hrs</strong><div class="activity-note">Steep volcanic path. Guide provides flashlight and a breakfast cooked in volcanic steam at the top — eggs and toast, one of Indonesia's most memorable small moments.</div></div></div>
+    <div class="activity"><div class="activity-time">6:00 AM</div><div class="activity-detail"><strong>Sunrise from the crater rim</strong><div class="activity-note">Views of Mt. Agung, the caldera lake, and the Bali coast on clear days. One of the most iconic experiences in Indonesia.</div></div></div>
+    <div class="activity"><div class="activity-time">8:30 AM</div><div class="activity-detail"><strong>Kintamani / Penelokan caldera rim viewpoint</strong><div class="activity-note">On the descent road — stop for coffee and photos along the clifftop ridge overlooking Lake Batur and the volcano you just climbed. Spectacular perspective from up here. ~20–30 mins. Skip the food at the tourist restaurants — overpriced and mediocre.</div></div></div>
+    <div class="activity"><div class="activity-time">10:00 AM</div><div class="activity-detail"><strong>Toya Devasya Natural Hot Springs — soak + brunch</strong><div class="activity-note">~20 mins descent from the rim. Soak first in the volcanic pools overlooking the caldera lake, then have a proper late breakfast/brunch at their halal-friendly restaurant once you're clean and relaxed. Entry + pool ~IDR 250,000/person. Much better food here than anywhere on the rim.</div></div></div>
+    <div class="activity"><div class="activity-time">12:30 PM</div><div class="activity-detail"><strong>Return to Ubud</strong><div class="activity-note">~1.5 hrs drive. You've been up since 2:30 AM — no agenda for the afternoon.</div></div></div>
+    <div class="activity"><div class="activity-time">Afternoon</div><div class="activity-detail"><strong>Rest, nap, or wander</strong><div class="activity-note">A slow warung lunch, another massage if you feel like it, or simply sleep. Tomorrow is a dedicated Sekumpul day — rest up.</div></div></div>
+    <div class="activity"><div class="activity-time">Evening</div><div class="activity-detail"><strong>Light dinner, early night</strong><div class="activity-note">Warung Wardani or Arabian Knight for a simple halal dinner. Early to bed — tomorrow is a dedicated Sekumpul day.</div></div></div>
+  </div>
+</div>
+
+<!-- DAY 4 -->
+<div class="day-block" id="day-4">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Sun · May 10</div><div class="day-label">Day 4</div></div>
+    <div class="day-title-col"><div class="title">Sekumpul Waterfall · Ulun Danu Beratan Temple · Jatiluwih Rice Terraces</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">North Bali · Private Driver</div><div class="hotel-sub">Puri Andong Villa</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">8:00 AM</div><div class="activity-detail"><strong>Depart Puri Andong → Sekumpul, North Bali</strong><div class="activity-note">Confirmed private car charter ✅ · 12 hrs · $35.40. ~1.5–2 hrs from Ubud. Early start is key — arrive before midday heat and tour group crowds. Bring non-slip shoes, dry bag, change of clothes, and cash for the local guide.</div></div></div>
+    <div class="activity"><div class="activity-time">9:45 AM</div><div class="activity-detail"><strong>Sekumpul Waterfall</strong><div class="activity-note">Hire a local guide at the entrance (~IDR 100,000–150,000) — essential as the path crosses private land and splits across multiple falls. Entry IDR 20,000. Steep descent of ~300 steps into the jungle ravine. Allow 2.5–3 hrs to explore fully. Warung at the entrance for a light lunch or snack after.</div></div></div>
+    <div class="activity"><div class="activity-time">1:00 PM</div><div class="activity-detail"><strong>Lunch near Sekumpul entrance</strong><div class="activity-note">Local warung at the trailhead — simple Indonesian food, very cheap. Rest and refuel before the drive south.</div></div></div>
+    <div class="activity"><div class="activity-time">2:00 PM</div><div class="activity-detail"><strong>Ulun Danu Beratan Temple</strong><div class="activity-note">~40 mins south of Sekumpul. Iconic floating Hindu temple on the misty volcanic crater lake of Beratan — one of Bali's most photographed sites. Entry IDR 75,000. Sarong required (available to borrow at gate). ~45 mins. The afternoon mist over the lake makes this time of day particularly atmospheric.</div></div></div>
+    <div class="activity"><div class="activity-time">3:15 PM</div><div class="activity-detail"><strong>Jatiluwih Rice Terraces</strong><div class="activity-note">~45 mins from Ulun Danu. UNESCO World Heritage-listed — far more expansive and less touristy than Tegallalang. Rolling terraced hillsides stretching to the horizon. Entry IDR 50,000. A short walk along the terrace path (~30–45 mins) is enough to take it all in. The late afternoon light here is beautiful.</div></div></div>
+    <div class="activity"><div class="activity-time">5:30 PM</div><div class="activity-detail"><strong>Drive back to Ubud</strong><div class="activity-note">~1.5 hrs from Jatiluwih. Arrive hotel ~7:00 PM. Light dinner at Warung Wardani or Arabian Knight. Early night — checking out tomorrow morning for Seminyak.</div></div></div>
+  </div>
+</div>
+
+<!-- DAY 5 -->
+<div class="day-block" id="day-5">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Mon · May 11</div><div class="day-label">Day 5</div></div>
+    <div class="day-title-col"><div class="title">Tanah Lot Temple En Route · Arrive Seminyak · Café Strip · Sunset</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Ubud → Seminyak · Driver</div><div class="hotel-sub">Chill Hotel Seminyak</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">9:30 AM</div><div class="activity-detail"><strong>Check out Ubud, drive southwest toward Tanah Lot</strong><div class="activity-note">Confirmed private car charter ✅ · 6 hrs · $27.41. Your driver takes you via Tabanan. ~1.5 hrs to the temple.</div></div></div>
+    <div class="activity"><div class="activity-time">11:00 AM</div><div class="activity-detail"><strong>Tanah Lot Temple</strong><div class="activity-note">One of Bali's most iconic temples — built on a rocky offshore islet surrounded by crashing waves. Entry IDR 75,000. Sarong required (rent at gate). ~1 hr. Much quieter midday than at sunset, which is a bonus.</div></div></div>
+    <div class="activity"><div class="activity-time">12:30 PM</div><div class="activity-detail"><strong>Continue to Seminyak, check in</strong><div class="activity-note">~45 mins from Tanah Lot. Store luggage if room isn't ready. Freshen up.</div></div></div>
+    <div class="activity"><div class="activity-time">1:30 PM</div><div class="activity-detail"><strong>Jl. Petitenget Café Crawl</strong> <span class="friend-tag">Manaal</span><div class="activity-note">Bias Courtyard (beautiful garden), Sea Circus (best brunch), Bo n Bun (best burgers in Seminyak). Hit 2–3 over a slow stroll. Confirm pork-free when ordering.</div></div></div>
+    <div class="activity"><div class="activity-time">3:00 PM</div><div class="activity-detail"><strong>Jl. Laksmana Flea Market</strong> <span class="friend-tag">Manaal</span><div class="activity-note">Vintage clothing, local crafts, handmade jewelry. Good 45-min browse. Jl. Kayu Aya area.</div></div></div>
+    <div class="activity"><div class="activity-time">4:30 PM</div><div class="activity-detail"><strong>Sunset at Potato Head Beach Club</strong><div class="activity-note">Stunning architecture, direct ocean views. Non-alcoholic mocktails and fresh juices available. Day bed IDR 500,000 redeemable against food.</div></div></div>
+    <div class="activity"><div class="activity-time">Evening</div><div class="activity-detail"><strong>Dinner at Queen's Tandoor or Warung Sunset</strong><div class="activity-note">Queen's Tandoor: halal-certified Indian. Warung Sunset: MUI-certified Indonesian. Both on or near Jl. Petitenget.</div></div></div>
+  </div>
+</div>
+
+<!-- DAY 6 -->
+<div class="day-block" id="day-6">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Tue · May 12</div><div class="day-label">Day 6</div></div>
+    <div class="day-title-col"><div class="title">Surf Lesson · Lunch or High Tea · Uluwatu · Kecak Fire Dance · Jimbaran</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Seminyak / Uluwatu · Pre-arranged Driver</div><div class="hotel-sub">Chill Hotel Seminyak</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">8:00 AM</div><div class="activity-detail"><strong>Surf lesson on Seminyak Beach</strong><div class="activity-note">Beginner-friendly — many instructors set up directly on the beach, no booking needed. ~1.5 hrs, ~$25–35/person. Seminyak has gentler waves than Canggu or Uluwatu, ideal for first-timers. Bring a change of clothes.</div></div></div>
+    <div class="activity"><div class="activity-time">10:30 AM</div><div class="activity-detail"><strong>Shower, relax, browse Jl. Petitenget boutiques</strong><div class="activity-note">Independent fashion, jewelry, and homewares on Jl. Kayu Aya and Jl. Laksmana. Low-pressure, good for an hour of browsing before lunch.</div></div></div>
+    <div class="activity"><div class="activity-time">1:00 PM</div><div class="activity-detail"><strong>Lunch or High Tea — Cafe Organic / Neon Palms or Biku Bali</strong> <span class="friend-tag">Manaal</span><div class="activity-note">Cafe Organic and Neon Palms are halal-friendly lunch options. Biku Bali is a beautiful 150-yr-old teak joglo for high tea (IDR 160,000 for two) — ⚠️ not halal-certified, serves alcohol, pork-free menu. Pick one based on your mood.</div></div></div>
+    <div class="activity"><div class="activity-time">3:00 PM</div><div class="activity-detail"><strong>Pre-arranged driver departs for Uluwatu</strong><div class="activity-note">Confirmed private car charter ✅ · 6 hrs · $27.41. ~1 hr 20 mins from Seminyak. Do NOT rely on Grab for the return — hundreds of tourists leave simultaneously after the Kecak dance. Entry IDR 50,000. Sarong required. ⚠️ Monkeys steal glasses and loose items — secure everything before entering.</div></div></div>
+    <div class="activity"><div class="activity-time">5:30 PM</div><div class="activity-detail"><strong>Arrive Uluwatu — explore temple grounds</strong><div class="activity-note">~30 mins before the Kecak show to walk the clifftop, watch the monkeys, and take in the ocean views before finding your seat.</div></div></div>
+    <div class="activity"><div class="activity-time">6:00 PM</div><div class="activity-detail"><strong>Kecak Fire Dance at sunset</strong> <span class="friend-tag">Manaal</span><div class="activity-note">Confirmed booking ✅ · 2 adults · $17.80 · 18:00 show. Open-air clifftop stage over the Indian Ocean. 50+ chanting men, Ramayana story, sun sets behind them. Bali's most spectacular performance.</div></div></div>
+    <div class="activity"><div class="activity-time">7:30 PM</div><div class="activity-detail"><strong>Jimbaran Bay beachside seafood</strong><div class="activity-note">30 mins from Uluwatu. Grilled fresh catch on the beach. Nyoman Cafe is Muslim-friendly. Return to Seminyak — pack tonight, early fast boat tomorrow.</div></div></div>
+  </div>
+</div>
+
+<!-- DAY 7 -->
+<div class="day-block" id="day-7">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Wed · May 13</div><div class="day-label">Day 7</div></div>
+    <div class="day-title-col"><div class="title">Fast Boat: Bali → Gili Islands · Snorkel · 3-Island Tour · Sunset</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Serangan → Gili Trawangan · Bicycle</div><div class="hotel-sub">Quma Boutique Hotel</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">7:00–7:30 AM</div><div class="activity-detail"><strong>Gili Getaway pickup from Chill Hotel Seminyak</strong><div class="activity-note">Free hotel pickup included. Driver arrives between 7:00–7:30 AM — have bags ready in lobby. ~20–25 mins to Serangan Harbour.</div></div></div>
+    <div class="activity"><div class="activity-time">8:15 AM</div><div class="activity-detail"><strong>Check in at Serangan Harbour — Giligetaway 2</strong><div class="activity-note">Check-in opens 08:15. Seats A1 & A2 confirmed. Board before 09:00 departure.</div></div></div>
+    <div class="activity"><div class="activity-time">9:00 AM</div><div class="activity-detail"><strong>Depart Serangan → Gili Trawangan</strong><div class="activity-note">Direct, 0 stops, 2h 15m crossing. Arrives 11:15 AM. Wear sandals — you wade briefly to disembark. Motion sickness tablets if sensitive. Dry bag for valuables.</div></div></div>
+    <div class="activity"><div class="activity-time">11:15 AM</div><div class="activity-detail"><strong>Arrive Gili T — hire cidomo to Quma Boutique Hotel, book snorkel tour immediately</strong><div class="activity-note">No cars or scooters on the island — hire a cidomo (horse cart) at the pier to transfer your bags to Quma (~IDR 30,000–50,000). Rent bikes at the pier (~$3/day) for getting around yourself. ⚠️ With only 1 night here, book the 3-island snorkel tour the moment you arrive — don't wait.</div></div></div>
+    <div class="activity"><div class="activity-time">1:00 PM</div><div class="activity-detail"><strong>Quick lunch on the east coast strip</strong><div class="activity-note">Plenty of halal warungs — look for "No Pork / Halal" signs. Fresh grilled fish, nasi goreng.</div></div></div>
+    <div class="activity"><div class="activity-time">2:00 PM</div><div class="activity-detail"><strong>3-Island Snorkel Tour</strong><div class="activity-note">IDR 150,000–200,000/person. Underwater art statues, Turtle Point, Gili Meno white sandbar. Gear + guide included. ~2.5–3 hrs. With 1 night on the island this is your primary activity — prioritise it.</div></div></div>
+    <div class="activity"><div class="activity-time">5:30 PM</div><div class="activity-detail"><strong>West coast sunset</strong><div class="activity-note">Cycle to the west coast — faces Bali with Mt. Agung on the horizon. Gili T's most beautiful daily moment. Early dinner, early night — ferry to Lombok tomorrow morning.</div></div></div>
+  </div>
+</div>
+
+<!-- DAY 8 -->
+<div class="day-block" id="day-8">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Thu · May 14</div><div class="day-label">Day 8</div></div>
+    <div class="day-title-col"><div class="title">Gili → Lombok · Tiu Kelep Waterfall · Arrive Kuta Lombok</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Gili → N. Lombok → Kuta Lombok · Local Driver</div><div class="hotel-sub">El Tropico Boutique Hotel</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">9:00 AM</div><div class="activity-detail"><strong>Public boat Gili T → Bangsal, Lombok</strong><div class="activity-note">Walk to the public boat ticket counter on Gili T (in front of Pandawa Medical). Tickets IDR 15,000–35,000/person. Boats depart when full — usually every 15–30 mins. ~30–40 mins crossing. ⚠️ You will wade through shallow water to board and disembark — wear sandals and hold bags above water. Arrange your Bangsal driver in advance via El Tropico the night before — ask them to have a driver meet you at Bangsal port for the full day to Tiu Kelep → Kuta Lombok (IDR 500,000–700,000). Bags stay locked in the car during the waterfall hike.</div></div></div>
+    <div class="activity"><div class="activity-time">10:00 AM</div><div class="activity-detail"><strong>Arrive Bangsal · meet confirmed driver</strong><div class="activity-note">Confirmed private car charter ✅ · Honda Raize · 12 hrs · $42.25. WhatsApp driver to confirm you've landed. Walk past the touts — your confirmed driver will be waiting. Drive ~45 mins east to Senaru (Tiu Kelep).</div></div></div>
+    <div class="activity"><div class="activity-time">11:00 AM</div><div class="activity-detail"><strong>Tiu Kelep Waterfall, Senaru</strong> <span class="friend-tag">Manaal</span><div class="activity-note">Two connected falls — Sendang Gile (lower, easy) and Tiu Kelep (upper, 30-min jungle trek with river crossings). Entry IDR 20,000. Local guide at gate (~IDR 50,000). ⚠️ Pack a full change of clothes — you will get wet. Water shoes essential — the river crossings are slippery and fully submerge your feet. ~2.5 hrs total.</div></div></div>
+    <div class="activity"><div class="activity-time">1:30 PM</div><div class="activity-detail"><strong>Drive south to Kuta Lombok (~2 hrs)</strong><div class="activity-note">Scenic drive through Lombok's interior. Stop at a halal warung for lunch — Lombok is 90% Muslim so halal is default everywhere. Ask your driver for a recommendation.</div></div></div>
+    <div class="activity"><div class="activity-time">4:00 PM</div><div class="activity-detail"><strong>Check in to El Tropico Boutique Hotel</strong><div class="activity-note">Drop bags, shower, change out of waterfall clothes. A proper check-in before heading to the beach.</div></div></div>
+    <div class="activity"><div class="activity-time">5:00 PM</div><div class="activity-detail"><strong>Selong Belanak Beach — first swim in Lombok</strong><div class="activity-note">~20 mins west of Kuta Lombok. Lombok's most beautiful wide crescent bay — turquoise, nearly empty, gentle waves. A beautiful way to close out a big travel day.</div></div></div>
+    <div class="activity"><div class="activity-time">Evening</div><div class="activity-detail"><strong>Dinner in Kuta Lombok</strong><div class="activity-note">Must try: Ayam Taliwang — Lombok's signature spiced grilled chicken with fiery sambal. Order with Plecing Kangkung. Every warung in Kuta serves it. IDR 30,000–60,000.</div></div></div>
+  </div>
+</div>
+
+<!-- DAY 9 -->
+<div class="day-block" id="day-9">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Fri · May 15</div><div class="day-label">Day 9</div></div>
+    <div class="day-title-col"><div class="title">Sasak Village · Jumu'ah · Tanjung Aan · Bukit Merese Sunset</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Kuta Lombok · Scooter</div><div class="hotel-sub">El Tropico Boutique Hotel</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">7:30 AM</div><div class="activity-detail"><strong>Rent scooters from hotel (~$6/day each)</strong><div class="activity-note">Best scooter opportunity of the trip — quiet roads, flat terrain, short distances. Hotel arranges rental. Helmets provided.</div></div></div>
+    <div class="activity"><div class="activity-time">8:00 AM</div><div class="activity-detail"><strong>Sasak Village (Ende or Sade)</strong> <span class="friend-tag">Manaal</span><div class="activity-note">Traditional Sasak indigenous village, 20 mins scooter from Kuta. Ende is smaller and more authentic; Sade is larger and more tourism-organized. Thatched houses, traditional weaving. Entry + guide IDR 20,000–50,000. ~1 hr.</div></div></div>
+    <div class="activity"><div class="activity-time">10:00 AM</div><div class="activity-detail"><strong>Scooter exploration — Kuta Lombok coastline</strong><div class="activity-note">Ride the coastal road east and west of Kuta at your own pace. Views of the bays, quiet roads, local life. No agenda — just enjoy being on two wheels in Lombok.</div></div></div>
+    <div class="activity"><div class="activity-time">12:00 PM</div><div class="activity-detail"><strong>Jumu'ah — Friday Prayers</strong><div class="activity-note">Find a local mosque near Kuta Lombok for Friday prayers — several within easy scooter distance. Dress modestly, remove shoes. One of the most immersive experiences you can have in Lombok — the call to prayer carries across the whole town and the community atmosphere is genuinely special. ~45 mins including prayer.</div></div></div>
+    <div class="activity"><div class="activity-time">1:30 PM</div><div class="activity-detail"><strong>Halal lunch in Kuta Lombok</strong><div class="activity-note">Nasi Balap Puyung — local Lombok rice dish with spiced shredded chicken, fried tempe, sambal. IDR 20,000–30,000 at any warung. Also the last chance to try Ayam Taliwang.</div></div></div>
+    <div class="activity"><div class="activity-time">3:00 PM</div><div class="activity-detail"><strong>Tanjung Aan Beach</strong><div class="activity-note">10 mins east of Kuta on scooter. Two coves with different sand textures side by side — one white, one pepper-like. Beautiful and uncrowded.</div></div></div>
+    <div class="activity"><div class="activity-time">5:30 PM</div><div class="activity-detail"><strong>Bukit Merese Hill at Sunset</strong><div class="activity-note">15-min easy hike, 360° panoramic views — Indian Ocean one side, Kuta Bay the other. Free entry. Just 10 mins from Kuta on the scooter. One of Lombok's most beautiful sunset spots.</div></div></div>
+    <div class="activity"><div class="activity-time">Evening</div><div class="activity-detail"><strong>Final Lombok dinner · pack for tomorrow</strong><div class="activity-note">Book your midday fast boat back to Bali tonight if not already done. No early start needed tomorrow — Day 10 begins with a relaxed morning drive northwest toward Mataram.</div></div></div>
+  </div>
+</div>
+
+<!-- DAY 10 -->
+<div class="day-block" id="day-10">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Sat · May 16</div><div class="day-label">Day 10</div></div>
+    <div class="day-title-col"><div class="title">Bayumulek Pottery · Hubbul Watan Masjid · Boat to Bali · Final Seminyak Evening</div></div>
+    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Kuta Lombok → Mataram → Bali · Driver + Fast Boat</div><div class="hotel-sub">Chill Hotel Seminyak</div></div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">8:30 AM</div><div class="activity-detail"><strong>Check out Kuta Lombok · Pre-arrange Driver → Mataram</strong><div class="activity-note">~1 hr to Mataram area. No rush today — your flight home is tomorrow at 4:00 PM so you have plenty of buffer. Bags in the car throughout. Arrange driver through El Tropico the night before (May 15) — IDR 400,000–500,000 for the full route to Bangsal.</div></div></div>
+    <div class="activity"><div class="activity-time">9:30 AM</div><div class="activity-detail"><strong>Bayumulek Pottery Village</strong><div class="activity-note">UNESCO-recognized traditional Sasak pottery village near Mataram. Watch artisans hand-build using ancient techniques — no wheel, shaped entirely by hand. Buy directly from the artisans. ~45 mins. One of Lombok's most authentic craft experiences.</div></div></div>
+    <div class="activity"><div class="activity-time">11:00 AM</div><div class="activity-detail"><strong>Hubbul Watan Masjid (Islamic Center NTB)</strong><div class="activity-note">One of Indonesia's most stunning mosques — grand architecture set on a hill near Mataram with sweeping views. Beautiful for the grounds alone. Dress modestly, remove shoes before entering. ~45 mins. Bangsal port is just 30–40 mins north from here — perfect positioning for the boat.</div></div></div>
+    <div class="activity"><div class="activity-time">12:30 PM</div><div class="activity-detail"><strong>Depart Kuta Lombok → Bangsal port</strong><div class="activity-note">~1.5 hrs drive north. Ask El Tropico to arrange driver (~IDR 400,000–500,000). Leave by 12:30 PM to arrive Bangsal comfortably before 15:00 departure.</div></div></div>
+    <div class="activity"><div class="activity-time">3:00 PM</div><div class="activity-detail"><strong>BlueWater Express XIV — Bangsal → Serangan (#BWE26031625)</strong><div class="activity-note">15:00 depart Bangsal → 17:55 arrive Serangan (via Penida). Modern 84-seat vessel, air-conditioned. BlueWater private transfer drops you at Chill Hotel Seminyak — arrive hotel ~6:30 PM.</div></div></div>
+
+    <div class="activity"><div class="activity-time">Evening</div><div class="activity-detail"><strong>Final dinner in Seminyak</strong><div class="activity-note">Return to a favourite spot from Days 5–6. No agenda, no rush. Pack tonight so departure morning is easy.</div></div></div>
+  </div>
+</div>
+
+<!-- DEPARTURE -->
+<div class="day-block" id="day-departure">
+  <div class="day-header">
+    <div class="day-date-col"><div class="date">Sun · May 17</div><div class="day-label">Departure Day</div></div>
+    <div class="day-title-col"><div class="title">Fly Home from DPS</div></div>
+    <div class="day-location-col"><div class="loc">DPS Airport</div></div>
+  </div>
+  <div class="day-body">
+    <div class="activity"><div class="activity-time">Morning</div><div class="activity-detail"><strong>Final breakfast · last beach walk</strong><div class="activity-note">Keep it slow. Bali mornings are beautiful — enjoy one last coffee.</div></div></div>
+    <div class="activity"><div class="activity-time">12:30 PM</div><div class="activity-detail"><strong>Transfer to DPS Airport</strong><div class="activity-note">~30–45 mins from Seminyak. Depart by 12:30 PM to arrive 3 hrs before your 4:00 PM flight. Grab from Chill Hotel ~IDR 80,000–120,000. Duty-free Bali coffee makes a great gift.</div></div></div>
+  </div>
+</div>
+
+
+
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- SECTION 2: PRACTICAL TIPS -->
+<!-- ============================================================ -->
+<h2 class="section-title" id="section-2">2 — Practical Tips</h2>
+
+<div class="two-col">
+  <div class="logistics-box">
+    <h4>Money & ATMs</h4>
+    <p>Withdraw IDR from BNI, BCA, or Mandiri ATMs (~$170–200 daily limit). Carry cash always — cards not accepted at most Gili and Lombok spots.</p>
+  </div>
+  <div class="logistics-box">
+    <h4>SIM Card</h4>
+    <p>Buy Telkomsel at DPS arrivals — best coverage across all three islands. 10GB for ~IDR 75,000 (~$5). Passport required. Activate before leaving the airport. eSIM via Airalo also works if you prefer not to swap physical cards.</p>
+  </div>
+  <div class="logistics-box">
+    <h4>Tipping</h4>
+    <p>Drivers: IDR 50,000–150,000/day depending on length. Massage therapists: IDR 20,000–50,000. Guides (Batur, Sekumpul, Tiu Kelep): IDR 50,000–100,000.</p>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 3: HALAL FOOD GUIDE -->
+<!-- ============================================================ -->
+<h2 class="section-title" id="section-3">3 — Halal Food Guide</h2>
+<p>Items marked 🕌 are MUI-certified or explicitly halal-certified. Items marked ⚠️ are pork-free but not formally certified — always confirm with staff when ordering.</p>
+
+<h3 class="sub-title">Ubud</h3>
+<div class="food-zone">
+  <div class="food-item"><div class="name">Arabian Knight Ubud <span class="cert">🕌 MUI Certified · Musholla On-Site</span></div><div class="desc">Best halal restaurant in Ubud. Lamb mandi, kabsa, shawarma, hummus, MANDI rice. On-site prayer room. Open 9 AM–1 AM. Jl. Suweta No.1, near Ubud Palace. Widely reviewed by Muslim travelers as the go-to.</div></div>
+  <div class="food-item"><div class="name">Warung Wardani <span class="cert">🕌 Halal Certified</span></div><div class="desc">Traditional Indonesian warung on Jl. Gootama. Nasi Campur, Gado-Gado, Lawar. IDR 40,000–70,000/meal. Beloved by locals — no tourist markup.</div></div>
+  <div class="food-item"><div class="name">Bale Udang Mang Engking <span class="cert">🕌 Halal Certified</span></div><div class="desc">Unique experience — dining in floating bamboo gazebos over a fish pond. Famous for honey-grilled prawns. Special atmosphere for a nice dinner. Multiple Bali locations.</div></div>
+  <div class="food-item"><div class="name">Seniman Coffee <span class="cert warn">⚠️ Pork-Free — Not MUI Certified</span> <span class="friend-tag">Manaal</span></div><div class="desc">Ubud's best specialty coffee. Indonesian and Western breakfast. No pork. Jl. Sriwedari No.5. Opens 8 AM.</div></div>
+  <div class="food-item"><div class="name">Huma Cafe <span class="cert warn">⚠️ Pork-Free — Confirm When Ordering</span> <span class="friend-tag">Manaal</span></div><div class="desc">Newer Ubud café with beautiful setting. Good for breakfast or lunch. Confirm halal prep with staff.</div></div>
+</div>
+
+<h3 class="sub-title">Seminyak</h3>
+<div class="food-zone">
+  <div class="food-item"><div class="name">Warung Sunset <span class="cert">🕌 MUI Certified</span></div><div class="desc">Jl. Petitenget. Nasi Goreng, Mie Goreng, Indonesian staples. IDR 30,000–80,000. Open until 11 PM. Reliable certified pick close to all recommended hotels.</div></div>
+  <div class="food-item"><div class="name">Queen's Tandoor Seminyak <span class="cert">🕌 Halal Certified</span></div><div class="desc">Indian halal — curries, biryani, naan, tandoori chicken. Upscale pricing (~IDR 100,000–200,000/dish). Multiple Bali locations. Worth it for a special dinner.</div></div>
+  <div class="food-item"><div class="name">Cafe Organic Petitenget <span class="cert warn">⚠️ Halal-Friendly</span> <span class="friend-tag">Manaal</span></div><div class="desc">Healthy, clean eating, beautiful garden setting. Good for light lunch or breakfast. Jl. Petitenget area.</div></div>
+  <div class="food-item"><div class="name">Bias Courtyard / Sea Circus / Bo n Bun / Neon Palms <span class="cert warn">⚠️ Pork-Free — Confirm Halal</span> <span class="friend-tag">Manaal</span></div><div class="desc">All on or near Jl. Petitenget. Pork-free options at each — confirm halal prep when ordering. Good for café crawl on Day 4 morning.</div></div>
+  <div class="food-item"><div class="name">Biku Bali <span class="cert warn">⚠️ Not Halal Certified — Serves Alcohol</span> <span class="friend-tag">Manaal</span></div><div class="desc">Beautiful 150-yr-old teak joglo. Pork-free menu, Indonesian high tea IDR 160,000 for two. Serves alcohol — visit with awareness if you choose to go. Stick to Indonesian dishes and tea.</div></div>
+</div>
+
+<h3 class="sub-title">Lombok — Halal by Default Everywhere</h3>
+<div class="food-zone">
+  <div class="food-item"><div class="name">All Local Warungs <span class="cert">🕌 Halal by Default</span></div><div class="desc">Lombok is 90% Muslim. Every local warung is halal. No pork on menus anywhere. The most stress-free eating zone of the entire trip — no checking, no asking, no concerns.</div></div>
+  <div class="food-item"><div class="name">🍗 Must Try: Ayam Taliwang</div><div class="desc">Lombok's signature dish — grilled chicken (whole or half) with a fiery chili-tomato sauce. Order with Plecing Kangkung (water spinach with sambal). Every warung in Kuta Lombok serves it. IDR 40,000–80,000.</div></div>
+  <div class="food-item"><div class="name">🍚 Must Try: Nasi Balap Puyung</div><div class="desc">Local Lombok rice dish — shredded spiced chicken, fried tempe, sambal, bean sprouts. Quick, cheap, and delicious for breakfast or lunch. IDR 20,000–30,000.</div></div>
+  <div class="food-item"><div class="name">Hubbul Watan Grand Mosque Canteen, Mataram <span class="friend-tag">Manaal</span></div><div class="desc">One of Lombok's most historic mosques — worth visiting the grounds. Simple halal canteen food nearby if you pass through Mataram on Day 8 or 9.</div></div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 4: BOOKINGS & COSTS -->
+<!-- ============================================================ -->
+<h2 class="section-title" id="section-4">4 — Bookings & Costs</h2>
+
+<table class="transport-table">
+  <tr><th>What</th><th>Dates</th><th>Details</th><th>Cost (USD)</th></tr>
+  <tr><td><strong>Flights</strong></td><td>May 5–17 · SFO ↔ DPS</td><td>Cathay Pacific · 2 travelers · Round trip + seat selection</td><td>$2,055.26</td></tr>
+  <tr><td><strong>Airport Transfer</strong></td><td>May 6, 3:00 PM</td><td>Standard transfer from Ngurah Rai International Airport</td><td>Free</td></tr>
+  <tr><td><strong>e-VOA (B1 Tourist Visa)</strong></td><td>May 6 · Both travelers</td><td>US + India passports · evisa.imigrasi.go.id</td><td>$61.00</td></tr>
+  <tr><td><strong>Bali Tourist Levy</strong></td><td>May 6 · Both travelers</td><td>IDR 150,000/person · lovebali.baliprov.go.id</td><td>$19.00</td></tr>
+  <tr><td><strong>Puri Andong Villa</strong></td><td>May 6–11 · Ubud · 5 nights</td><td>Free cancellation</td><td>$267.00</td></tr>
+  <tr><td><strong>Mason Elephant Park</strong></td><td>May 7 · Day 1</td><td>General Admission · 2 adults</td><td>$44.50</td></tr>
+  <tr><td><strong>ATV Gorilla Adventures</strong></td><td>May 8 · Day 2 · 9:00 AM</td><td>Guided ATV + Monkey Forest + Tirta Empul · Ref: GYGBLHQ9KH2L</td><td>$165.44</td></tr>
+  <tr><td><strong>Mt Batur Jeep + Trekking</strong></td><td>May 9 · Day 3</td><td>Private Sunrise Trekking + Hot Spring · Round-trip transfers · 2 pax</td><td>$99.80</td></tr>
+  <tr><td><strong>Private Car Charter</strong></td><td>May 10 · Day 4 · 12 hrs</td><td>Sekumpul · Ulun Danu · Jatiluwih</td><td>$35.40</td></tr>
+  <tr><td><strong>Private Car Charter</strong></td><td>May 11 · Day 5 · 6 hrs</td><td>Ubud → Tanah Lot → Seminyak</td><td>$27.41</td></tr>
+  <tr><td><strong>Chill Hotel Seminyak</strong></td><td>May 11–13 · Seminyak · 2 nights</td><td>Free cancellation · 98 ft from beach</td><td>$153.00</td></tr>
+  <tr><td><strong>Kecak & Fire Dance · Uluwatu</strong></td><td>May 12 · Day 6 · 18:00</td><td>2 adults</td><td>$17.80</td></tr>
+  <tr><td><strong>Private Car Charter</strong></td><td>May 12 · Day 6 · 6 hrs</td><td>Uluwatu evening</td><td>$27.41</td></tr>
+  <tr><td><strong>Gili Getaway Fast Boat</strong></td><td>May 13 · Serangan → Gili T</td><td>09:00 → 11:15 · Direct · 2 adults · Seats A1, A2</td><td>~$95.00</td></tr>
+  <tr><td><strong>Quma Boutique Hotel</strong></td><td>May 13–14 · Gili Trawangan · 1 night</td><td>Adults only · Free cancellation · Halal restaurant</td><td>$69.00</td></tr>
+  <tr><td><strong>Lombok Private Car Charter</strong></td><td>May 14 · Day 8 · 12 hrs</td><td>Honda Raize · Bangsal → Tiu Kelep → Kuta Lombok</td><td>$42.25</td></tr>
+  <tr><td><strong>El Tropico Boutique Hotel</strong></td><td>May 14–16 · Kuta Lombok · 2 nights</td><td>Free cancellation · 3 pools · 7-min walk to beach</td><td>$131.00</td></tr>
+  <tr><td><strong>BlueWater Express XIV</strong></td><td>May 16 · Bangsal → Serangan</td><td>15:00 → 17:55 · Via Penida · 2 adults · Private transfer · #BWE26031625</td><td>~$123.00</td></tr>
+  <tr><td><strong>Chill Hotel Seminyak</strong></td><td>May 16–17 · Seminyak · 1 night</td><td>Free cancellation · Same hotel as May 11–13</td><td>$76.00</td></tr>
+  <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">✈️ Flights</td><td style="font-weight:700;color:#1a4a3a;">$2,055.26</td></tr>
+  <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">🏨 Accommodation (5 hotels)</td><td style="font-weight:700;color:#1a4a3a;">$696.00</td></tr>
+  <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">🎯 Activities & Tours</td><td style="font-weight:700;color:#1a4a3a;">$427.54</td></tr>
+  <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">🚗 Transport (cars + boats)</td><td style="font-weight:700;color:#1a4a3a;">$250.47</td></tr>
+  <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">🛂 Visas & Entry</td><td style="font-weight:700;color:#1a4a3a;">$80.00</td></tr>
+  <tr><td colspan="3" style="background:#1a4a3a;color:white;border:none;"><strong>TOTAL</strong></td><td style="background:#1a4a3a;color:white;border:none;"><strong>$3,509.27</strong></td></tr>
+</table>
+
+
+
+</div><!-- end .content -->
+
+<footer>Bali · Gili Islands · Lombok · May 6–17, 2026 · Halal-Friendly Travel Guide · Version 5</footer>
+
+<script>
+function getStickyOffset() {
+  const toc = document.querySelector('.toc');
+  const strip = document.querySelector('.date-strip');
+  let offset = 0;
+  if (toc) offset += toc.offsetHeight;
+  if (strip && strip.offsetParent !== null) offset += strip.offsetHeight;
+  return offset + 12;
+}
+
+function positionDateStrip() {
+  const toc = document.querySelector('.toc');
+  const strip = document.querySelector('.date-strip');
+  if (toc && strip) {
+    strip.style.top = toc.offsetHeight + 'px';
+  }
+}
+
+function scrollToDay(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const toc = document.querySelector('.toc');
+  const strip = document.querySelector('.date-strip');
+  let offset = toc ? toc.offsetHeight : 0;
+  offset += strip ? strip.offsetHeight : 0;
+  offset += 12;
+  const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const toc = document.querySelector('.toc');
+  const offset = (toc ? toc.offsetHeight : 0) + 12;
+  const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+}
+
+window.addEventListener('load', positionDateStrip);
+window.addEventListener('resize', positionDateStrip);
+</script>
+</body>
+</html>
