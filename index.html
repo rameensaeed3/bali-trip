@@ -42,7 +42,8 @@
   /* TOC */
   .toc { background: #f7f4ee; padding: 10px 16px; border-bottom: 2px solid #d4cfc5; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
   .toc-grid { display: flex; flex-direction: row; justify-content: space-around; gap: 0; }
-  .toc-item { font-size: 16px; font-weight: 600; letter-spacing: 0.3px; color: #2d7a5a; padding: 4px 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap; text-transform: uppercase; border-radius: 4px; }
+  .toc-item { font-size: 16px; font-weight: 600; letter-spacing: 0.3px; color: #2d7a5a; padding: 4px 14px; cursor: pointer; transition: all 0.15s; white-space: nowrap; text-transform: uppercase; border-radius: 4px; border-right: 2px solid #d4cfc5; }
+  .toc-item:last-child { border-right: none; }
   .toc-item:hover { color: #1a4a3a; }
   .toc-item.active { background: #1a4a3a; color: white; }
 
