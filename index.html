@@ -42,9 +42,7 @@
   /* TOC */
   .toc { background: #f7f4ee; padding: 10px 16px; border-bottom: 2px solid #d4cfc5; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
   .toc-grid { display: flex; flex-direction: row; justify-content: space-around; gap: 0; align-items: center; }
-  .toc-item { font-size: 16px; font-weight: 600; letter-spacing: 0.3px; color: #2d7a5a; padding: 4px 0; margin: 0 16px; cursor: pointer; transition: all 0.15s; white-space: nowrap; text-transform: uppercase; border-radius: 4px; }
-  .toc-item:last-child { border-right: none; }
-  .toc-separator { width: 1px; height: 18px; background: #d4cfc5; flex-shrink: 0; }
+  .toc-item { font-size: 16px; font-weight: 600; letter-spacing: 0.3px; color: #2d7a5a; padding: 4px 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap; text-transform: uppercase; border-radius: 4px; }
   .toc-item:hover { color: #1a4a3a; }
   .toc-item.active { background: #1a4a3a; color: white; }
 
@@ -208,11 +206,8 @@
 <div class="toc">
   <div class="toc-grid">
     <div class="toc-item" id="toc-section-1" onclick="scrollToSection('section-1')">Itinerary</div>
-    <div class="toc-separator"></div>
     <div class="toc-item" id="toc-section-2" onclick="scrollToSection('section-2')">Tips</div>
-    <div class="toc-separator"></div>
     <div class="toc-item" id="toc-section-3" onclick="scrollToSection('section-3')">Halal Food</div>
-    <div class="toc-separator"></div>
     <div class="toc-item" id="toc-section-4" onclick="scrollToSection('section-4')">Bookings</div>
   </div>
 </div>
