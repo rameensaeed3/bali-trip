@@ -14,10 +14,18 @@
   .cover h2 { font-size: 15px; font-weight: 300; opacity: 0.85; margin-bottom: 10px; letter-spacing: 2px; }
   .cover .subtitle { font-size: 13px; opacity: 1; letter-spacing: 0.5px; color: rgba(255,255,255,0.92); font-family: Arial, sans-serif; }
 
+  /* DATE STRIP WRAPPER */
+  .date-strip-wrapper { position: relative; background: #f0ede6; border-bottom: 2px solid #ccc; }
+  .date-strip-wrapper.is-sticky { position: fixed; left: 0; right: 0; z-index: 90; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
+  .date-strip-arrow { position: absolute; right: 0; top: 0; bottom: 0; width: 28px; background: linear-gradient(to right, transparent, #f0ede6 70%); display: flex; align-items: center; justify-content: center; font-size: 16px; color: #2d7a5a; pointer-events: none; font-weight: 700; }
+
   /* DATE STRIP */
-  .date-strip { display: flex; overflow-x: auto; background: #f0ede6; border-bottom: 2px solid #ccc; z-index: 90; box-shadow: 0 2px 8px rgba(0,0,0,0.10); -webkit-overflow-scrolling: touch; }
-  .date-strip.is-sticky { position: fixed; left: 0; right: 0; }
-  .date-cell { flex: 0 0 calc(100% / 12); min-width: 60px; padding: 9px 4px; border-right: 1px solid #d4cfc5; text-align: center; }
+  .date-strip { display: flex; overflow-x: auto; background: #f0ede6; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .date-strip::-webkit-scrollbar { display: none; }
+  .date-strip.is-sticky { position: fixed; left: 0; right: 0; z-index: 90; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
+  .date-cell { flex: 0 0 calc(100% / 12); min-width: 60px; padding: 9px 4px; border-right: 1px solid #d4cfc5; text-align: center; cursor: pointer; transition: background 0.15s; }
+  .date-cell.active { background: #2d7a5a !important; }
+  .date-cell.active .wd, .date-cell.active .d, .date-cell.active .loc { color: white !important; opacity: 1; }
   .date-cell { padding: 9px 4px; border-right: 1px solid #d4cfc5; text-align: center; }
   .date-cell:last-child { border-right: none; }
   .date-cell .wd { font-size: 9px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
@@ -32,11 +40,9 @@
   .date-cell.depart:hover { background: #f5d0d0; }
 
   /* TOC */
-  .toc { background: #f7f4ee; padding: 12px 60px; border-bottom: 2px solid #d4cfc5; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
-  .toc h3 { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #999; margin-bottom: 6px; }
-  .toc-grid { display: flex; flex-direction: row; gap: 0; }
-  .toc-item { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: #2d7a5a; padding: 6px 20px 6px 0; border-right: 1px solid #ccc; margin-right: 20px; cursor: pointer; transition: color 0.15s; white-space: nowrap; text-transform: uppercase; }
-  .toc-item:last-child { border-right: none; margin-right: 0; }
+  .toc { background: #f7f4ee; padding: 10px 16px; border-bottom: 2px solid #d4cfc5; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  .toc-grid { display: flex; flex-direction: row; justify-content: space-between; gap: 0; }
+  .toc-item { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: #2d7a5a; padding: 4px 0; cursor: pointer; transition: color 0.15s; white-space: nowrap; text-transform: uppercase; border-right: none; margin-right: 0; }
   .toc-item:hover { color: #1a4a3a; }
 
   /* CONTENT */
@@ -54,16 +60,16 @@
 
   /* DAY BLOCKS */
   .day-block { background: white; border: 1px solid #e0dbd0; border-radius: 8px; margin: 16px 0; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.04); }
-  .day-header { background: #1a4a3a; color: white; padding: 0; display: grid; grid-template-columns: 140px 1fr auto; }
-  .day-date-col { padding: 12px 16px; border-right: 1px solid rgba(255,255,255,0.15); }
+  .day-header { background: #1a4a3a; color: white; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .day-date-col { display: flex; flex-direction: column; flex-shrink: 0; }
   .day-date-col .date { font-size: 13px; font-weight: 700; line-height: 1.3; }
   .day-date-col .day-label { font-size: 10px; opacity: 0.6; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
-  .day-title-col { padding: 12px 16px; display: flex; align-items: center; }
-  .day-title-col .title { font-size: 14px; font-weight: 600; }
-  .day-location-col { padding: 12px 16px; display: flex; align-items: center; }
+  .day-title-col { flex: 1; padding: 0 12px; }
+  .day-title-col .title { font-size: 13px; font-weight: 600; }
+  .day-location-col { flex-shrink: 0; }
   .day-location-col .loc-wrap { text-align: right; }
-  .day-location-col .loc { font-size: 10px; opacity: 0.6; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; display: block; }
-  .day-location-col .hotel-sub { font-size: 10px; opacity: 0.5; display: block; margin-top: 3px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .day-location-col .loc { font-size: 10px; opacity: 0.65; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; display: block; }
+  .day-location-col .hotel-sub { font-size: 10px; opacity: 0.5; display: block; margin-top: 2px; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
   .day-body { padding: 16px 20px; }
 
   .activity { display: flex; gap: 14px; padding: 8px 0; border-bottom: 1px solid #f5f2ec; }
@@ -122,20 +128,18 @@
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 12px 0; }
 
   @media (max-width: 700px) {
-    /* Cover — prevent wrapping */
+    /* Cover */
     .cover { padding: 18px 12px; }
-    .cover h1 { font-size: 18px; letter-spacing: 1px; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cover h1 { font-size: 18px; letter-spacing: 1px; margin-bottom: 5px; }
     .cover h2 { font-size: 11px; margin-bottom: 5px; letter-spacing: 1px; }
     .cover .subtitle { font-size: 10px; line-height: 1.5; }
 
-    /* TOC — single scrollable row, no wrapping */
-    .toc { padding: 8px 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
-    .toc-grid { display: inline-flex; flex-wrap: nowrap; gap: 0; }
-    .toc-item { font-size: 10px; padding: 4px 12px 4px 0; margin-right: 12px; white-space: nowrap; }
+    /* TOC — always fits, evenly spaced */
+    .toc { padding: 8px 12px; }
+    .toc-item { font-size: 9px; letter-spacing: 0; }
 
-    /* Date strip — single scrollable row */
-    .date-strip { display: flex; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .date-cell { flex: 0 0 72px; min-width: 72px; padding: 7px 4px; }
+    /* Date strip cells */
+    .date-cell { flex: 0 0 64px; min-width: 64px; padding: 7px 3px; }
     .date-cell .wd { font-size: 7px; }
     .date-cell .d { font-size: 12px; }
     .date-cell .loc { font-size: 7px; }
@@ -143,12 +147,16 @@
     /* Content */
     .content { padding: 12px 14px 32px; }
 
-    /* Day blocks */
-    .day-header { grid-template-columns: 1fr; gap: 0; }
-    .day-date-col { padding: 10px 14px 4px; }
-    .day-title-col { padding: 0 14px 4px; }
-    .day-location-col { padding: 0 14px 10px; }
-    .day-title-col .title { font-size: 13px; }
+    /* Day headers — stay side by side but compact */
+    .day-header { padding: 8px 12px; gap: 8px; }
+    .day-date-col .date { font-size: 12px; }
+    .day-date-col .day-label { font-size: 9px; }
+    .day-title-col { padding: 0 8px; }
+    .day-title-col .title { font-size: 11px; }
+    .day-location-col .loc { font-size: 9px; }
+    .day-location-col .hotel-sub { font-size: 8px; }
+
+    /* Activities */
     .activity { flex-direction: column; gap: 2px; }
     .activity-time { min-width: unset; font-size: 10px; padding-top: 0; }
     .activity-detail { font-size: 13px; }
@@ -165,7 +173,7 @@
     .two-col { grid-template-columns: 1fr; }
 
     /* Food */
-    .food-zone { gap: 8px; padding: 14px 14px; }
+    .food-zone { padding: 14px; }
     .food-item .name { font-size: 12px; }
     .food-item .desc { font-size: 11px; }
 
@@ -202,19 +210,22 @@
 </div>
 
 <!-- DATE STRIP -->
-<div class="date-strip">
-  <div class="date-cell arrive" onclick="scrollToDay('day-arrival')"><div class="wd">Wed</div><div class="d">May 6</div><div class="loc">Arrive → Ubud</div></div>
-  <div class="date-cell" onclick="scrollToDay('day-1')"><div class="wd">Thu</div><div class="d">May 7</div><div class="loc">Ubud Day 1</div></div>
-  <div class="date-cell" onclick="scrollToDay('day-2')"><div class="wd">Fri</div><div class="d">May 8</div><div class="loc">Ubud Day 2</div></div>
-  <div class="date-cell" onclick="scrollToDay('day-3')"><div class="wd">Sat</div><div class="d">May 9</div><div class="loc">Ubud Day 3</div></div>
-  <div class="date-cell" onclick="scrollToDay('day-4')"><div class="wd">Sun</div><div class="d">May 10</div><div class="loc">Ubud Day 4</div></div>
-  <div class="date-cell" onclick="scrollToDay('day-5')"><div class="wd">Mon</div><div class="d">May 11</div><div class="loc">→ Seminyak</div></div>
-  <div class="date-cell" onclick="scrollToDay('day-6')"><div class="wd">Tue</div><div class="d">May 12</div><div class="loc">Seminyak</div></div>
-  <div class="date-cell" onclick="scrollToDay('day-7')"><div class="wd">Wed</div><div class="d">May 13</div><div class="loc">→ Gili Islands</div></div>
-  <div class="date-cell" onclick="scrollToDay('day-8')"><div class="wd">Thu</div><div class="d">May 14</div><div class="loc">→ Lombok</div></div>
-  <div class="date-cell" onclick="scrollToDay('day-9')"><div class="wd">Fri</div><div class="d">May 15</div><div class="loc">Lombok</div></div>
-  <div class="date-cell" onclick="scrollToDay('day-10')"><div class="wd">Sat</div><div class="d">May 16</div><div class="loc">→ Bali (return)</div></div>
-  <div class="date-cell depart" onclick="scrollToDay('day-departure')"><div class="wd">Sun</div><div class="d">May 17</div><div class="loc">Fly Home</div></div>
+<div class="date-strip-wrapper">
+  <div class="date-strip" id="date-strip">
+    <div class="date-cell arrive" id="dc-day-arrival" onclick="scrollToDay('day-arrival')"><div class="wd">Wed</div><div class="d">May 6</div><div class="loc">Arrive</div></div>
+    <div class="date-cell" id="dc-day-1" onclick="scrollToDay('day-1')"><div class="wd">Thu</div><div class="d">May 7</div><div class="loc">Ubud</div></div>
+    <div class="date-cell" id="dc-day-2" onclick="scrollToDay('day-2')"><div class="wd">Fri</div><div class="d">May 8</div><div class="loc">Ubud</div></div>
+    <div class="date-cell" id="dc-day-3" onclick="scrollToDay('day-3')"><div class="wd">Sat</div><div class="d">May 9</div><div class="loc">Ubud</div></div>
+    <div class="date-cell" id="dc-day-4" onclick="scrollToDay('day-4')"><div class="wd">Sun</div><div class="d">May 10</div><div class="loc">Ubud</div></div>
+    <div class="date-cell" id="dc-day-5" onclick="scrollToDay('day-5')"><div class="wd">Mon</div><div class="d">May 11</div><div class="loc">Seminyak</div></div>
+    <div class="date-cell" id="dc-day-6" onclick="scrollToDay('day-6')"><div class="wd">Tue</div><div class="d">May 12</div><div class="loc">Seminyak</div></div>
+    <div class="date-cell" id="dc-day-7" onclick="scrollToDay('day-7')"><div class="wd">Wed</div><div class="d">May 13</div><div class="loc">Gili T</div></div>
+    <div class="date-cell" id="dc-day-8" onclick="scrollToDay('day-8')"><div class="wd">Thu</div><div class="d">May 14</div><div class="loc">Lombok</div></div>
+    <div class="date-cell" id="dc-day-9" onclick="scrollToDay('day-9')"><div class="wd">Fri</div><div class="d">May 15</div><div class="loc">Lombok</div></div>
+    <div class="date-cell" id="dc-day-10" onclick="scrollToDay('day-10')"><div class="wd">Sat</div><div class="d">May 16</div><div class="loc">→ Bali</div></div>
+    <div class="date-cell depart" id="dc-day-departure" onclick="scrollToDay('day-departure')"><div class="wd">Sun</div><div class="d">May 17</div><div class="loc">Fly Home</div></div>
+  </div>
+  <div class="date-strip-arrow">›</div>
 </div>
 
 <!-- DATE STRIP PLACEHOLDER (maintains layout when strip goes fixed) -->
@@ -226,7 +237,6 @@
 <!-- SECTION 1: ITINERARY -->
 <!-- ============================================================ -->
 <h2 class="section-title" id="section-1">1 — Itinerary</h2>
-<p>Items tagged <span class="friend-tag">Manaal</span> are personal picks from a friend who visited. 🛵 marks scooter-appropriate moments.</p>
 
 <!-- ARRIVAL DAY -->
 <div class="day-block" id="day-arrival">
@@ -499,8 +509,8 @@
 <!-- ============================================================ -->
 <h2 class="section-title" id="section-4">4 — Bookings & Costs</h2>
 
+<div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
 <table class="transport-table">
-  <tr><th>What</th><th>Dates</th><th>Details</th><th>Cost (USD)</th></tr>
   <tr><td><strong>Flights</strong></td><td>May 5–17 · SFO ↔ DPS</td><td>Cathay Pacific · 2 travelers · Round trip + seat selection</td><td>$2,055.26</td></tr>
   <tr><td><strong>Airport Transfer</strong></td><td>May 6, 3:00 PM</td><td>Standard transfer from Ngurah Rai International Airport</td><td>Free</td></tr>
   <tr><td><strong>e-VOA (B1 Tourist Visa)</strong></td><td>May 6 · Both travelers</td><td>US + India passports · evisa.imigrasi.go.id</td><td>$61.00</td></tr>
@@ -527,6 +537,7 @@
   <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">🛂 Visas & Entry</td><td style="font-weight:700;color:#1a4a3a;">$80.00</td></tr>
   <tr><td colspan="3" style="background:#1a4a3a;color:white;border:none;"><strong>TOTAL</strong></td><td style="background:#1a4a3a;color:white;border:none;"><strong>$3,509.27</strong></td></tr>
 </table>
+</div>
 
 
 
@@ -535,60 +546,88 @@
 <footer>Bali · Gili Islands · Lombok · May 6–17, 2026 · Halal-Friendly Travel Guide · Version 5</footer>
 
 <script>
+const dayIds = ['day-arrival','day-1','day-2','day-3','day-4','day-5','day-6','day-7','day-8','day-9','day-10','day-departure'];
+
 function getTocHeight() {
   const toc = document.querySelector('.toc');
   return toc ? toc.offsetHeight : 0;
 }
 
 function getStripHeight() {
-  const strip = document.querySelector('.date-strip');
-  return strip ? strip.offsetHeight : 0;
+  const wrapper = document.querySelector('.date-strip-wrapper');
+  return wrapper ? wrapper.offsetHeight : 0;
 }
 
-// Position date strip below TOC when sticky
-function positionDateStrip() {
-  const strip = document.querySelector('.date-strip');
-  if (strip && strip.classList.contains('is-sticky')) {
-    strip.style.top = getTocHeight() + 'px';
+function setActiveDay() {
+  const tocH = getTocHeight();
+  const stripH = getStripHeight();
+  const offset = tocH + stripH + 20;
+  let activeId = null;
+
+  for (let i = dayIds.length - 1; i >= 0; i--) {
+    const el = document.getElementById(dayIds[i]);
+    if (el && el.getBoundingClientRect().top <= offset) {
+      activeId = dayIds[i];
+      break;
+    }
+  }
+
+  dayIds.forEach(id => {
+    const cell = document.getElementById('dc-' + id);
+    if (cell) {
+      cell.classList.toggle('active', id === activeId);
+    }
+  });
+
+  // Auto-scroll the date strip to show the active cell
+  if (activeId) {
+    const strip = document.getElementById('date-strip');
+    const activeCell = document.getElementById('dc-' + activeId);
+    if (strip && activeCell) {
+      const cellLeft = activeCell.offsetLeft;
+      const cellWidth = activeCell.offsetWidth;
+      const stripWidth = strip.offsetWidth;
+      const scrollTarget = cellLeft - (stripWidth / 2) + (cellWidth / 2);
+      strip.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+    }
   }
 }
 
-// Scroll-aware: show date strip only when inside itinerary section
 function handleScroll() {
-  const strip = document.querySelector('.date-strip');
+  const wrapper = document.querySelector('.date-strip-wrapper');
   const placeholder = document.getElementById('date-strip-placeholder');
   const itinerarySection = document.getElementById('section-1');
   const nextSection = document.getElementById('section-2');
-  if (!strip || !itinerarySection) return;
+  if (!wrapper || !itinerarySection) return;
 
   const tocH = getTocHeight();
-  const stripH = strip.offsetHeight;
   const scrollY = window.scrollY;
-  const sectionTop = itinerarySection.getBoundingClientRect().top + scrollY;
-  const sectionBottom = nextSection ? (nextSection.getBoundingClientRect().top + scrollY) : document.body.scrollHeight;
-  const stripNaturalTop = strip.getBoundingClientRect().top + scrollY;
+  const sectionTop = itinerarySection.getBoundingClientRect().top + scrollY - 10;
+  const lastDay = document.getElementById('day-departure');
+  const sectionBottom = lastDay
+    ? (lastDay.getBoundingClientRect().bottom + scrollY + 20)
+    : (nextSection ? (nextSection.getBoundingClientRect().top + scrollY) : document.body.scrollHeight);
 
   const inItinerary = scrollY + tocH >= sectionTop && scrollY + tocH < sectionBottom;
 
   if (inItinerary) {
-    if (!strip.classList.contains('is-sticky')) {
-      strip.classList.add('is-sticky');
-      strip.style.top = tocH + 'px';
-      strip.style.width = '100%';
-      if (placeholder) {
-        placeholder.style.display = 'block';
-        placeholder.style.height = stripH + 'px';
-      }
+    if (!wrapper.classList.contains('is-sticky')) {
+      const h = wrapper.offsetHeight;
+      wrapper.classList.add('is-sticky');
+      wrapper.style.top = tocH + 'px';
+      wrapper.style.width = '100%';
+      if (placeholder) { placeholder.style.display = 'block'; placeholder.style.height = h + 'px'; }
     }
   } else {
-    if (strip.classList.contains('is-sticky')) {
-      strip.classList.remove('is-sticky');
-      strip.style.top = '';
-      strip.style.width = '';
-      strip.style.position = '';
+    if (wrapper.classList.contains('is-sticky')) {
+      wrapper.classList.remove('is-sticky');
+      wrapper.style.top = '';
+      wrapper.style.width = '';
       if (placeholder) placeholder.style.display = 'none';
     }
   }
+
+  setActiveDay();
 }
 
 function scrollToDay(id) {
@@ -607,9 +646,19 @@ function scrollToSection(id) {
   window.scrollTo({ top: top, behavior: 'smooth' });
 }
 
+// Hide scroll arrow when date strip is fully scrolled
+function updateArrow() {
+  const strip = document.getElementById('date-strip');
+  const arrow = document.querySelector('.date-strip-arrow');
+  if (!strip || !arrow) return;
+  const atEnd = strip.scrollLeft + strip.offsetWidth >= strip.scrollWidth - 4;
+  arrow.style.opacity = atEnd ? '0' : '1';
+}
+
+document.getElementById('date-strip')?.addEventListener('scroll', updateArrow);
 window.addEventListener('scroll', handleScroll);
-window.addEventListener('resize', positionDateStrip);
-window.addEventListener('load', handleScroll);
+window.addEventListener('resize', handleScroll);
+window.addEventListener('load', () => { handleScroll(); updateArrow(); });
 </script>
 </body>
 </html>
