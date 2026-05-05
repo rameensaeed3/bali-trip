@@ -42,8 +42,9 @@
   /* TOC */
   .toc { background: #f7f4ee; padding: 10px 16px; border-bottom: 2px solid #d4cfc5; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
   .toc-grid { display: flex; flex-direction: row; justify-content: space-between; gap: 0; }
-  .toc-item { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: #2d7a5a; padding: 4px 0; cursor: pointer; transition: color 0.15s; white-space: nowrap; text-transform: uppercase; border-right: none; margin-right: 0; }
+  .toc-item { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: #2d7a5a; padding: 4px 8px; cursor: pointer; transition: all 0.15s; white-space: nowrap; text-transform: uppercase; border-radius: 4px; }
   .toc-item:hover { color: #1a4a3a; }
+  .toc-item.active { background: #1a4a3a; color: white; }
 
   /* CONTENT */
   .content { max-width: 960px; margin: 0 auto; padding: 20px 40px 48px; }
@@ -136,7 +137,7 @@
 
     /* TOC — always fits, evenly spaced */
     .toc { padding: 8px 12px; }
-    .toc-item { font-size: 9px; letter-spacing: 0; }
+    .toc-item { font-size: 11px; letter-spacing: 0; padding: 3px 4px; }
 
     /* Date strip cells */
     .date-cell { flex: 0 0 64px; min-width: 64px; padding: 7px 3px; }
@@ -168,6 +169,8 @@
     .transport-table td { padding: 7px 8px; font-size: 11px; }
     .transport-table th:nth-child(2),
     .transport-table td:nth-child(2) { display: none; }
+    .transport-table td[colspan="3"] { display: table-cell; }
+    .transport-table td[colspan="4"] { display: table-cell; }
 
     /* Two col */
     .two-col { grid-template-columns: 1fr; }
@@ -202,10 +205,10 @@
 <!-- TOC -->
 <div class="toc">
   <div class="toc-grid">
-    <div class="toc-item" onclick="scrollToSection('section-1')">Itinerary</div>
-    <div class="toc-item" onclick="scrollToSection('section-2')">Practical Tips</div>
-    <div class="toc-item" onclick="scrollToSection('section-3')">Halal Food Guide</div>
-    <div class="toc-item" onclick="scrollToSection('section-4')">Bookings & Costs</div>
+    <div class="toc-item" id="toc-section-1" onclick="scrollToSection('section-1')">Itinerary</div>
+    <div class="toc-item" id="toc-section-2" onclick="scrollToSection('section-2')">Tips</div>
+    <div class="toc-item" id="toc-section-3" onclick="scrollToSection('section-3')">Halal Food</div>
+    <div class="toc-item" id="toc-section-4" onclick="scrollToSection('section-4')">Bookings</div>
   </div>
 </div>
 
@@ -530,12 +533,12 @@
   <tr><td><strong>El Tropico Boutique Hotel</strong></td><td>May 14–16 · Kuta Lombok · 2 nights</td><td>Free cancellation · 3 pools · 7-min walk to beach</td><td>$131.00</td></tr>
   <tr><td><strong>BlueWater Express XIV</strong></td><td>May 16 · Bangsal → Serangan</td><td>15:00 → 17:55 · Via Penida · 2 adults · Private transfer · #BWE26031625</td><td>~$123.00</td></tr>
   <tr><td><strong>Chill Hotel Seminyak</strong></td><td>May 16–17 · Seminyak · 1 night</td><td>Free cancellation · Same hotel as May 11–13</td><td>$76.00</td></tr>
-  <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">✈️ Flights</td><td style="font-weight:700;color:#1a4a3a;">$2,055.26</td></tr>
-  <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">🏨 Accommodation (5 hotels)</td><td style="font-weight:700;color:#1a4a3a;">$696.00</td></tr>
-  <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">🎯 Activities & Tours</td><td style="font-weight:700;color:#1a4a3a;">$427.54</td></tr>
-  <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">🚗 Transport (cars + boats)</td><td style="font-weight:700;color:#1a4a3a;">$250.47</td></tr>
-  <tr style="background:#f0f0e8;"><td colspan="3" style="font-weight:700;color:#1a4a3a;">🛂 Visas & Entry</td><td style="font-weight:700;color:#1a4a3a;">$80.00</td></tr>
-  <tr><td colspan="3" style="background:#1a4a3a;color:white;border:none;"><strong>TOTAL</strong></td><td style="background:#1a4a3a;color:white;border:none;"><strong>$3,509.27</strong></td></tr>
+  <tr style="background:#f0f0e8;"><td style="font-weight:700;color:#1a4a3a;">✈️ Flights</td><td style="display:none;"></td><td style="font-weight:700;color:#1a4a3a;"></td><td style="font-weight:700;color:#1a4a3a;">$2,055.26</td></tr>
+  <tr style="background:#f0f0e8;"><td style="font-weight:700;color:#1a4a3a;">🏨 Accommodation (5 hotels)</td><td style="display:none;"></td><td style="font-weight:700;color:#1a4a3a;"></td><td style="font-weight:700;color:#1a4a3a;">$696.00</td></tr>
+  <tr style="background:#f0f0e8;"><td style="font-weight:700;color:#1a4a3a;">🎯 Activities & Tours</td><td style="display:none;"></td><td style="font-weight:700;color:#1a4a3a;"></td><td style="font-weight:700;color:#1a4a3a;">$427.54</td></tr>
+  <tr style="background:#f0f0e8;"><td style="font-weight:700;color:#1a4a3a;">🚗 Transport (cars + boats)</td><td style="display:none;"></td><td style="font-weight:700;color:#1a4a3a;"></td><td style="font-weight:700;color:#1a4a3a;">$250.47</td></tr>
+  <tr style="background:#f0f0e8;"><td style="font-weight:700;color:#1a4a3a;">🛂 Visas & Entry</td><td style="display:none;"></td><td style="font-weight:700;color:#1a4a3a;"></td><td style="font-weight:700;color:#1a4a3a;">$80.00</td></tr>
+  <tr><td style="background:#1a4a3a;color:white;border:none;"><strong>TOTAL</strong></td><td style="background:#1a4a3a;border:none;display:none;"></td><td style="background:#1a4a3a;color:white;border:none;"></td><td style="background:#1a4a3a;color:white;border:none;"><strong>$3,509.27</strong></td></tr>
 </table>
 </div>
 
@@ -547,6 +550,7 @@
 
 <script>
 const dayIds = ['day-arrival','day-1','day-2','day-3','day-4','day-5','day-6','day-7','day-8','day-9','day-10','day-departure'];
+const sectionIds = ['section-1','section-2','section-3','section-4'];
 
 function getTocHeight() {
   const toc = document.querySelector('.toc');
@@ -555,7 +559,7 @@ function getTocHeight() {
 
 function getStripHeight() {
   const wrapper = document.querySelector('.date-strip-wrapper');
-  return wrapper ? wrapper.offsetHeight : 0;
+  return wrapper && wrapper.classList.contains('is-sticky') ? wrapper.offsetHeight : 0;
 }
 
 function setActiveDay() {
@@ -574,41 +578,55 @@ function setActiveDay() {
 
   dayIds.forEach(id => {
     const cell = document.getElementById('dc-' + id);
-    if (cell) {
-      cell.classList.toggle('active', id === activeId);
-    }
+    if (cell) cell.classList.toggle('active', id === activeId);
   });
 
-  // Auto-scroll the date strip to show the active cell
   if (activeId) {
     const strip = document.getElementById('date-strip');
     const activeCell = document.getElementById('dc-' + activeId);
     if (strip && activeCell) {
-      const cellLeft = activeCell.offsetLeft;
-      const cellWidth = activeCell.offsetWidth;
-      const stripWidth = strip.offsetWidth;
-      const scrollTarget = cellLeft - (stripWidth / 2) + (cellWidth / 2);
+      const scrollTarget = activeCell.offsetLeft - (strip.offsetWidth / 2) + (activeCell.offsetWidth / 2);
       strip.scrollTo({ left: scrollTarget, behavior: 'smooth' });
     }
   }
+}
+
+function setActiveTocSection() {
+  const tocH = getTocHeight();
+  const offset = tocH + 20;
+  let activeId = null;
+
+  for (let i = sectionIds.length - 1; i >= 0; i--) {
+    const el = document.getElementById(sectionIds[i]);
+    if (el && el.getBoundingClientRect().top <= offset) {
+      activeId = sectionIds[i];
+      break;
+    }
+  }
+
+  sectionIds.forEach(id => {
+    const item = document.getElementById('toc-' + id);
+    if (item) item.classList.toggle('active', id === activeId);
+  });
 }
 
 function handleScroll() {
   const wrapper = document.querySelector('.date-strip-wrapper');
   const placeholder = document.getElementById('date-strip-placeholder');
   const itinerarySection = document.getElementById('section-1');
-  const nextSection = document.getElementById('section-2');
   if (!wrapper || !itinerarySection) return;
 
   const tocH = getTocHeight();
   const scrollY = window.scrollY;
   const sectionTop = itinerarySection.getBoundingClientRect().top + scrollY - 10;
+
+  // Strip disappears when last day block starts entering viewport
   const lastDay = document.getElementById('day-departure');
   const sectionBottom = lastDay
-    ? (lastDay.getBoundingClientRect().bottom + scrollY + 20)
-    : (nextSection ? (nextSection.getBoundingClientRect().top + scrollY) : document.body.scrollHeight);
+    ? (lastDay.getBoundingClientRect().top + scrollY)
+    : document.body.scrollHeight;
 
-  const inItinerary = scrollY + tocH >= sectionTop && scrollY + tocH < sectionBottom;
+  const inItinerary = (scrollY + tocH) >= sectionTop && (scrollY + tocH) < sectionBottom;
 
   if (inItinerary) {
     if (!wrapper.classList.contains('is-sticky')) {
@@ -628,6 +646,7 @@ function handleScroll() {
   }
 
   setActiveDay();
+  setActiveTocSection();
 }
 
 function scrollToDay(id) {
@@ -646,7 +665,6 @@ function scrollToSection(id) {
   window.scrollTo({ top: top, behavior: 'smooth' });
 }
 
-// Hide scroll arrow when date strip is fully scrolled
 function updateArrow() {
   const strip = document.getElementById('date-strip');
   const arrow = document.querySelector('.date-strip-arrow');
