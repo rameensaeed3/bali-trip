@@ -41,8 +41,8 @@
 
   /* TOC */
   .toc { background: #f7f4ee; padding: 10px 16px; border-bottom: 2px solid #d4cfc5; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
-  .toc-grid { display: flex; flex-direction: row; justify-content: space-between; gap: 0; }
-  .toc-item { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: #2d7a5a; padding: 4px 8px; cursor: pointer; transition: all 0.15s; white-space: nowrap; text-transform: uppercase; border-radius: 4px; }
+  .toc-grid { display: flex; flex-direction: row; justify-content: space-around; gap: 0; }
+  .toc-item { font-size: 14px; font-weight: 600; letter-spacing: 0.3px; color: #2d7a5a; padding: 4px 6px; cursor: pointer; transition: all 0.15s; white-space: nowrap; text-transform: uppercase; border-radius: 4px; }
   .toc-item:hover { color: #1a4a3a; }
   .toc-item.active { background: #1a4a3a; color: white; }
 
@@ -61,14 +61,14 @@
 
   /* DAY BLOCKS */
   .day-block { background: white; border: 1px solid #e0dbd0; border-radius: 8px; margin: 16px 0; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.04); }
-  .day-header { background: #1a4a3a; color: white; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .day-header { background: #1a4a3a; color: white; padding: 10px 16px; display: flex; flex-direction: column; gap: 4px; }
+  .day-header-top { display: flex; justify-content: space-between; align-items: flex-start; }
   .day-date-col { display: flex; flex-direction: column; flex-shrink: 0; }
   .day-date-col .date { font-size: 13px; font-weight: 700; line-height: 1.3; }
   .day-date-col .day-label { font-size: 10px; opacity: 0.6; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
-  .day-title-col { flex: 1; padding: 0 12px; }
-  .day-title-col .title { font-size: 13px; font-weight: 600; }
-  .day-location-col { flex-shrink: 0; }
-  .day-location-col .loc-wrap { text-align: right; }
+  .day-title-col { width: 100%; }
+  .day-title-col .title { font-size: 13px; font-weight: 600; line-height: 1.4; }
+  .day-location-col { flex-shrink: 0; text-align: right; }
   .day-location-col .loc { font-size: 10px; opacity: 0.65; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; display: block; }
   .day-location-col .hotel-sub { font-size: 10px; opacity: 0.5; display: block; margin-top: 2px; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
   .day-body { padding: 16px 20px; }
@@ -148,12 +148,12 @@
     /* Content */
     .content { padding: 12px 14px 32px; }
 
-    /* Day headers — stay side by side but compact */
-    .day-header { padding: 8px 12px; gap: 8px; }
+    /* Day headers */
+    .day-header { padding: 8px 12px; gap: 3px; }
     .day-date-col .date { font-size: 12px; }
     .day-date-col .day-label { font-size: 9px; }
-    .day-title-col { padding: 0 8px; }
-    .day-title-col .title { font-size: 11px; }
+    .day-title-col { padding: 0; }
+    .day-title-col .title { font-size: 12px; }
     .day-location-col .loc { font-size: 9px; }
     .day-location-col .hotel-sub { font-size: 8px; }
 
@@ -244,9 +244,11 @@
 <!-- ARRIVAL DAY -->
 <div class="day-block" id="day-arrival">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Wed · May 6</div><div class="day-label">Arrival Day</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Wed · May 6</div><div class="day-label">Arrival Day</div></div>
+      <div class="day-location-col"><div class="loc">Ubud · Private Driver</div><div class="hotel-sub">Puri Andong Villa</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Land & Decompress</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Ubud · Private Driver</div><div class="hotel-sub">Puri Andong Villa</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">3:00 PM</div><div class="activity-detail"><strong>DPS Airport → Ubud</strong><div class="activity-note">Confirmed pickup at Ngurah Rai International Airport, 3:00 PM. Driver will be waiting at arrivals. ~1.5 hrs to Puri Andong Villa.</div></div></div>
@@ -257,9 +259,11 @@
 <!-- DAY 1 -->
 <div class="day-block" id="day-1">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Thu · May 7</div><div class="day-label">Day 1</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Thu · May 7</div><div class="day-label">Day 1</div></div>
+      <div class="day-location-col"><div class="loc">Ubud · Scooter</div><div class="hotel-sub">Puri Andong Villa</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Tegallalang · Elephant Safari Park · Ubud Market & Palace · Campuhan Sunset · Arabian Knight</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Ubud · Scooter</div><div class="hotel-sub">Puri Andong Villa</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">9:00 AM</div><div class="activity-detail"><strong>Rent scooter from Puri Andong or nearby shop</strong><div class="activity-note">Ask hotel reception or walk to any rental shop on Jl. Raya Ubud — IDR 70,000–100,000/day (~$4–6). Bring California motorcycle license and cash. Avoid leaving passport as deposit — offer IDR 200,000–300,000 cash deposit instead. ⚠️ Photograph the scooter all around before riding off to document pre-existing damage. Download Google Maps offline for Ubud/Gianyar/Bangli region the night before.</div></div></div>
@@ -276,9 +280,11 @@
 <!-- DAY 2 -->
 <div class="day-block" id="day-2">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Fri · May 8</div><div class="day-label">Day 2</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Fri · May 8</div><div class="day-label">Day 2</div></div>
+      <div class="day-location-col"><div class="loc">Ubud · Guided Tour</div><div class="hotel-sub">Puri Andong Villa</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Monkey Forest · ATV Jungle Adventure · Tirta Empul · Bale Udang Dinner</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Ubud · Guided Tour</div><div class="hotel-sub">Puri Andong Villa</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">9:00 AM</div><div class="activity-detail"><strong>Gorilla Adventures Bali pickup from Puri Andong Villa</strong><div class="activity-note">Driver contacts you to arrange exact pickup 1–2 days before. Booking ref: GYGBLHQ9KH2L. Wear comfortable clothes and closed-toe shoes. Bring a change of clothes, waterproof camera, and cash. Payment auto-charged May 5.</div></div></div>
@@ -295,9 +301,11 @@
 <!-- DAY 3 -->
 <div class="day-block" id="day-3">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Sat · May 9</div><div class="day-label">Day 3</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Sat · May 9</div><div class="day-label">Day 3</div></div>
+      <div class="day-location-col"><div class="loc">North Bali / Ubud · Guided Tour</div><div class="hotel-sub">Puri Andong Villa</div></div>
+    </div>
     <div class="day-title-col"><div class="title">⭐ Mt. Batur Sunrise · Kintamani Viewpoint · Hot Springs · Rest</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">North Bali / Ubud · Guided Tour</div><div class="hotel-sub">Puri Andong Villa</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">2:30 AM</div><div class="activity-detail"><strong>Mt Batur Jeep + Trekking pickup from Puri Andong Villa</strong><div class="activity-note">Confirmed booking ✅ · Private Sunrise Trekking + Hot Spring · $99.80 for 2 · Pickup from Puri Andong Villa. Driver will contact via WhatsApp the afternoon before to confirm exact time. Wear warm layers — cold at the summit. Bring headlamp.</div></div></div>
@@ -314,9 +322,11 @@
 <!-- DAY 4 -->
 <div class="day-block" id="day-4">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Sun · May 10</div><div class="day-label">Day 4</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Sun · May 10</div><div class="day-label">Day 4</div></div>
+      <div class="day-location-col"><div class="loc">North Bali · Private Driver</div><div class="hotel-sub">Puri Andong Villa</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Sekumpul Waterfall · Ulun Danu Beratan Temple · Jatiluwih Rice Terraces</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">North Bali · Private Driver</div><div class="hotel-sub">Puri Andong Villa</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">8:00 AM</div><div class="activity-detail"><strong>Depart Puri Andong → Sekumpul, North Bali</strong><div class="activity-note">Confirmed private car charter ✅ · 12 hrs · $35.40. ~1.5–2 hrs from Ubud. Early start is key — arrive before midday heat and tour group crowds. Bring non-slip shoes, dry bag, change of clothes, and cash for the local guide.</div></div></div>
@@ -331,9 +341,11 @@
 <!-- DAY 5 -->
 <div class="day-block" id="day-5">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Mon · May 11</div><div class="day-label">Day 5</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Mon · May 11</div><div class="day-label">Day 5</div></div>
+      <div class="day-location-col"><div class="loc">Ubud → Seminyak · Driver</div><div class="hotel-sub">Chill Hotel Seminyak</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Tanah Lot Temple En Route · Arrive Seminyak · Café Strip · Sunset</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Ubud → Seminyak · Driver</div><div class="hotel-sub">Chill Hotel Seminyak</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">9:30 AM</div><div class="activity-detail"><strong>Check out Ubud, drive southwest toward Tanah Lot</strong><div class="activity-note">Confirmed private car charter ✅ · 6 hrs · $27.41. Your driver takes you via Tabanan. ~1.5 hrs to the temple.</div></div></div>
@@ -349,9 +361,11 @@
 <!-- DAY 6 -->
 <div class="day-block" id="day-6">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Tue · May 12</div><div class="day-label">Day 6</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Tue · May 12</div><div class="day-label">Day 6</div></div>
+      <div class="day-location-col"><div class="loc">Seminyak / Uluwatu · Pre-arranged Driver</div><div class="hotel-sub">Chill Hotel Seminyak</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Surf Lesson · Lunch or High Tea · Uluwatu · Kecak Fire Dance · Jimbaran</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Seminyak / Uluwatu · Pre-arranged Driver</div><div class="hotel-sub">Chill Hotel Seminyak</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">8:00 AM</div><div class="activity-detail"><strong>Surf lesson on Seminyak Beach</strong><div class="activity-note">Beginner-friendly — many instructors set up directly on the beach, no booking needed. ~1.5 hrs, ~$25–35/person. Seminyak has gentler waves than Canggu or Uluwatu, ideal for first-timers. Bring a change of clothes.</div></div></div>
@@ -367,9 +381,11 @@
 <!-- DAY 7 -->
 <div class="day-block" id="day-7">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Wed · May 13</div><div class="day-label">Day 7</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Wed · May 13</div><div class="day-label">Day 7</div></div>
+      <div class="day-location-col"><div class="loc">Serangan → Gili Trawangan · Bicycle</div><div class="hotel-sub">Quma Boutique Hotel</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Fast Boat: Bali → Gili Islands · Snorkel · 3-Island Tour · Sunset</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Serangan → Gili Trawangan · Bicycle</div><div class="hotel-sub">Quma Boutique Hotel</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">7:00–7:30 AM</div><div class="activity-detail"><strong>Gili Getaway pickup from Chill Hotel Seminyak</strong><div class="activity-note">Free hotel pickup included. Driver arrives between 7:00–7:30 AM — have bags ready in lobby. ~20–25 mins to Serangan Harbour.</div></div></div>
@@ -385,9 +401,11 @@
 <!-- DAY 8 -->
 <div class="day-block" id="day-8">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Thu · May 14</div><div class="day-label">Day 8</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Thu · May 14</div><div class="day-label">Day 8</div></div>
+      <div class="day-location-col"><div class="loc">Gili → N. Lombok → Kuta Lombok · Local Driver</div><div class="hotel-sub">El Tropico Boutique Hotel</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Gili → Lombok · Tiu Kelep Waterfall · Arrive Kuta Lombok</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Gili → N. Lombok → Kuta Lombok · Local Driver</div><div class="hotel-sub">El Tropico Boutique Hotel</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">9:00 AM</div><div class="activity-detail"><strong>Public boat Gili T → Bangsal, Lombok</strong><div class="activity-note">Walk to the public boat ticket counter on Gili T (in front of Pandawa Medical). Tickets IDR 15,000–35,000/person. Boats depart when full — usually every 15–30 mins. ~30–40 mins crossing. ⚠️ You will wade through shallow water to board and disembark — wear sandals and hold bags above water. Arrange your Bangsal driver in advance via El Tropico the night before — ask them to have a driver meet you at Bangsal port for the full day to Tiu Kelep → Kuta Lombok (IDR 500,000–700,000). Bags stay locked in the car during the waterfall hike.</div></div></div>
@@ -403,9 +421,11 @@
 <!-- DAY 9 -->
 <div class="day-block" id="day-9">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Fri · May 15</div><div class="day-label">Day 9</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Fri · May 15</div><div class="day-label">Day 9</div></div>
+      <div class="day-location-col"><div class="loc">Kuta Lombok · Scooter</div><div class="hotel-sub">El Tropico Boutique Hotel</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Sasak Village · Jumu'ah · Tanjung Aan · Bukit Merese Sunset</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Kuta Lombok · Scooter</div><div class="hotel-sub">El Tropico Boutique Hotel</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">7:30 AM</div><div class="activity-detail"><strong>Rent scooters from hotel (~$6/day each)</strong><div class="activity-note">Best scooter opportunity of the trip — quiet roads, flat terrain, short distances. Hotel arranges rental. Helmets provided.</div></div></div>
@@ -422,9 +442,11 @@
 <!-- DAY 10 -->
 <div class="day-block" id="day-10">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Sat · May 16</div><div class="day-label">Day 10</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Sat · May 16</div><div class="day-label">Day 10</div></div>
+      <div class="day-location-col"><div class="loc">Kuta Lombok → Mataram → Bali · Driver + Fast Boat</div><div class="hotel-sub">Chill Hotel Seminyak</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Bayumulek Pottery · Hubbul Watan Masjid · Boat to Bali · Final Seminyak Evening</div></div>
-    <div class="day-location-col"><div class="loc-wrap"><div class="loc">Kuta Lombok → Mataram → Bali · Driver + Fast Boat</div><div class="hotel-sub">Chill Hotel Seminyak</div></div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">8:30 AM</div><div class="activity-detail"><strong>Check out Kuta Lombok · Pre-arrange Driver → Mataram</strong><div class="activity-note">~1 hr to Mataram area. No rush today — your flight home is tomorrow at 4:00 PM so you have plenty of buffer. Bags in the car throughout. Arrange driver through El Tropico the night before (May 15) — IDR 400,000–500,000 for the full route to Bangsal.</div></div></div>
@@ -440,9 +462,11 @@
 <!-- DEPARTURE -->
 <div class="day-block" id="day-departure">
   <div class="day-header">
-    <div class="day-date-col"><div class="date">Sun · May 17</div><div class="day-label">Departure Day</div></div>
+    <div class="day-header-top">
+      <div class="day-date-col"><div class="date">Sun · May 17</div><div class="day-label">Departure Day</div></div>
+      <div class="day-location-col"><div class="loc">DPS Airport</div></div>
+    </div>
     <div class="day-title-col"><div class="title">Fly Home from DPS</div></div>
-    <div class="day-location-col"><div class="loc">DPS Airport</div></div>
   </div>
   <div class="day-body">
     <div class="activity"><div class="activity-time">Morning</div><div class="activity-detail"><strong>Final breakfast · last beach walk</strong><div class="activity-note">Keep it slow. Bali mornings are beautiful — enjoy one last coffee.</div></div></div>
