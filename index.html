@@ -702,35 +702,29 @@ document.getElementById('date-strip')?.addEventListener('scroll', updateArrow);
 window.addEventListener('scroll', handleScroll);
 window.addEventListener('resize', handleScroll);
 function autoScrollToCurrentDay() {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const now = new Date();
+  const todayStr = now.getFullYear() + '-' +
+    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+    String(now.getDate()).padStart(2, '0');
 
   const dayMap = {
-    'day-arrival':  new Date('2026-05-06'),
-    'day-1':        new Date('2026-05-07'),
-    'day-2':        new Date('2026-05-08'),
-    'day-3':        new Date('2026-05-09'),
-    'day-4':        new Date('2026-05-10'),
-    'day-5':        new Date('2026-05-11'),
-    'day-6':        new Date('2026-05-12'),
-    'day-7':        new Date('2026-05-13'),
-    'day-8':        new Date('2026-05-14'),
-    'day-9':        new Date('2026-05-15'),
-    'day-10':       new Date('2026-05-16'),
-    'day-departure':new Date('2026-05-17'),
+    'day-arrival':   '2026-05-06',
+    'day-1':         '2026-05-07',
+    'day-2':         '2026-05-08',
+    'day-3':         '2026-05-09',
+    'day-4':         '2026-05-10',
+    'day-5':         '2026-05-11',
+    'day-6':         '2026-05-12',
+    'day-7':         '2026-05-13',
+    'day-8':         '2026-05-14',
+    'day-9':         '2026-05-15',
+    'day-10':        '2026-05-16',
+    'day-departure': '2026-05-17',
   };
 
-  const tripStart = new Date('2026-05-06');
-  const tripEnd   = new Date('2026-05-17');
-
-  // If today is outside the trip, stay at top
-  if (today < tripStart || today > tripEnd) return;
-
-  // Find matching day
-  const matchId = Object.keys(dayMap).find(id => dayMap[id].getTime() === today.getTime());
+  const matchId = Object.keys(dayMap).find(id => dayMap[id] === todayStr);
   if (!matchId) return;
 
-  // Small delay to let sticky elements settle before scrolling
   setTimeout(() => scrollToDay(matchId), 300);
 }
 
