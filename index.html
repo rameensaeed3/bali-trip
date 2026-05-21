@@ -166,11 +166,13 @@
     .activity-note { font-size: 13px; }
 
     /* Tables */
-    .transport-table { font-size: 11px; }
+    .transport-table { font-size: 11px; width: 100%; table-layout: fixed; }
     .transport-table th { font-size: 9px; padding: 6px 8px; }
-    .transport-table td { padding: 7px 8px; font-size: 13px; }
-    .transport-table th:nth-child(2),
-    .transport-table td:nth-child(2) { display: none; }
+    .transport-table td { padding: 7px 8px; font-size: 13px; word-wrap: break-word; overflow-wrap: break-word; }
+    .transport-table th:nth-child(1), .transport-table td:nth-child(1) { width: 28%; }
+    .transport-table th:nth-child(2), .transport-table td:nth-child(2) { display: none; }
+    .transport-table th:nth-child(3), .transport-table td:nth-child(3) { width: 52%; }
+    .transport-table th:nth-child(4), .transport-table td:nth-child(4) { width: 20%; }
     .transport-table td[colspan="3"] { display: table-cell; }
     .transport-table td[colspan="4"] { display: table-cell; }
 
@@ -208,7 +210,7 @@
 <div class="toc">
   <div class="toc-grid">
     <div class="toc-item" id="toc-section-1" onclick="scrollToSection('section-1')">Itinerary</div>
-    <div class="toc-item" id="toc-section-2" onclick="scrollToSection('section-2')">Tips & Recs</div>
+    <div class="toc-item" id="toc-section-2" onclick="scrollToSection('section-2')">Tips</div>
     <div class="toc-item" id="toc-section-3" onclick="scrollToSection('section-3')">Food Guide</div>
     <div class="toc-item" id="toc-section-4" onclick="scrollToSection('section-4')">Bookings</div>
   </div>
@@ -444,7 +446,7 @@
   <div class="day-header">
     <div class="day-header-top">
       <div class="day-date-col"><div class="date">Sat · May 16</div><div class="day-label">Day 10</div></div>
-      <div class="day-location-col"><div class="loc">Kuta Lombok → Mataram → Bali · Driver + Fast Boat</div><div class="hotel-sub">Chill Hotel Seminyak</div></div>
+      <div class="day-location-col"><div class="loc">Kuta Lombok · Driver + Fast Boat</div><div class="hotel-sub">Chill Hotel Seminyak</div></div>
     </div>
     <div class="day-title-col"><div class="title">Mataram Shopping · Epicentrum Mall · Masjid Hubbul Watan · Boat to Bali</div></div>
   </div>
@@ -581,7 +583,6 @@
 <!-- ============================================================ -->
 <h2 class="section-title" id="section-4">4 — Bookings & Costs</h2>
 
-<div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
 <table class="transport-table">
   <tr><td><strong>Flights</strong></td><td>May 5–17 · SFO ↔ DPS</td><td>Cathay Pacific · 2 travelers · Round trip + seat selection</td><td>$2,055.26</td></tr>
   <tr><td><strong>Airport Transfer</strong></td><td>May 6, 3:00 PM</td><td>Standard transfer from Ngurah Rai International Airport</td><td>Free</td></tr>
@@ -611,7 +612,6 @@
   <tr class="subtotal-row"><td>💵 On the Ground (Cash + Card)</td><td></td><td></td><td>$2,097.07</td></tr>
   <tr class="total-row"><td><strong>TOTAL</strong></td><td></td><td></td><td><strong>$5,564.09</strong></td></tr>
 </table>
-</div>
 
 
 
